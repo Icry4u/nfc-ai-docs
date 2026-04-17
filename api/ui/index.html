@@ -1,0 +1,2222 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Documentation for the NFC-AI Smart Shopping Assistant — Senior Project, Saudi Electronic University">
+      
+      
+      
+      
+        <link rel="prev" href="../">
+      
+      
+        <link rel="next" href="../data/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>UI Layer - NFC-AI: Smart Shopping Assistant</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="amber">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#api-reference-ui-layer" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="NFC-AI: Smart Shopping Assistant" class="md-header__button md-logo" aria-label="NFC-AI: Smart Shopping Assistant" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            NFC-AI: Smart Shopping Assistant
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              UI Layer
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../user-guide/getting-started/" class="md-tabs__link">
+          
+  
+  
+  User Guide
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../architecture/overview/" class="md-tabs__link">
+          
+  
+  
+  Architecture
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../" class="md-tabs__link">
+          
+  
+  
+  API Reference
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../discussion/qa-guide/" class="md-tabs__link">
+          
+  
+  
+  Discussion Prep
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="NFC-AI: Smart Shopping Assistant" class="md-nav__button md-logo" aria-label="NFC-AI: Smart Shopping Assistant" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    NFC-AI: Smart Shopping Assistant
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    User Guide
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    User Guide
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../user-guide/getting-started/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Getting Started
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../user-guide/nfc-scanning/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NFC Scanning
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../user-guide/ai-recommendations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AI Recommendations
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../user-guide/text-to-speech/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Text-to-Speech
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../user-guide/settings/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Settings & Preferences
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../user-guide/accessibility/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Accessibility
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Architecture
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Architecture
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../architecture/overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../architecture/data-flow/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Data Flow
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../architecture/nfc-system/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NFC System
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../architecture/ai-pipeline/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AI Pipeline
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../architecture/tts-engine/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    TTS Engine
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../architecture/database/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Database
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Reference
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    API Reference
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Package Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UI Layer
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UI Layer
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#mainactivity" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        MainActivity
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="MainActivity">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#key-responsibilities" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Key Responsibilities
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#key-methods" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Key Methods
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#nfc-flow" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        NFC Flow
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#splashfragment" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SplashFragment
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="SplashFragment">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#key-behavior" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Key Behavior
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#welcomefragment" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        WelcomeFragment
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="WelcomeFragment">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#collects" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Collects
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#key-logic" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Key Logic
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#homefragment" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        HomeFragment
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="HomeFragment">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#key-methods_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Key Methods
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#observers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Observers
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#productdetailfragment" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ProductDetailFragment
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="ProductDetailFragment">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#key-methods_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Key Methods
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tts-chain" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        TTS Chain
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#flags" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Flags
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#historyfragment" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        HistoryFragment
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="HistoryFragment">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#key-features" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Key Features
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#settingsfragment" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SettingsFragment
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="SettingsFragment">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#settings" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Settings
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#adapters" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Adapters
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Adapters">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#recentscanadapter" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        RecentScanAdapter
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#historyadapter" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        HistoryAdapter
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#recommendationadapter" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        RecommendationAdapter
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../data/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Data Layer
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../network/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Network Layer
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../utilities/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Utilities
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../viewmodels/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ViewModels
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Discussion Prep
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Discussion Prep
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../discussion/qa-guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Q&A Guide
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../discussion/technical-decisions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Technical Decisions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../quiz.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Committee Quiz
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#mainactivity" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        MainActivity
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="MainActivity">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#key-responsibilities" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Key Responsibilities
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#key-methods" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Key Methods
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#nfc-flow" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        NFC Flow
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#splashfragment" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SplashFragment
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="SplashFragment">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#key-behavior" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Key Behavior
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#welcomefragment" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        WelcomeFragment
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="WelcomeFragment">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#collects" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Collects
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#key-logic" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Key Logic
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#homefragment" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        HomeFragment
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="HomeFragment">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#key-methods_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Key Methods
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#observers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Observers
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#productdetailfragment" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ProductDetailFragment
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="ProductDetailFragment">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#key-methods_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Key Methods
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tts-chain" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        TTS Chain
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#flags" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Flags
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#historyfragment" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        HistoryFragment
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="HistoryFragment">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#key-features" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Key Features
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#settingsfragment" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SettingsFragment
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="SettingsFragment">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#settings" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Settings
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#adapters" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Adapters
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Adapters">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#recentscanadapter" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        RecentScanAdapter
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#historyadapter" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        HistoryAdapter
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#recommendationadapter" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        RecommendationAdapter
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="api-reference-ui-layer">API Reference — UI Layer<a class="headerlink" href="#api-reference-ui-layer" title="Permanent link">&para;</a></h1>
+<h2 id="mainactivity">MainActivity<a class="headerlink" href="#mainactivity" title="Permanent link">&para;</a></h2>
+<p><strong>Path:</strong> <code>ui/MainActivity.java</code></p>
+<p>The single activity that hosts all fragments via Navigation Component.</p>
+<h3 id="key-responsibilities">Key Responsibilities<a class="headerlink" href="#key-responsibilities" title="Permanent link">&para;</a></h3>
+<ul>
+<li>NFC foreground dispatch (enable/disable in onResume/onPause)</li>
+<li>Bottom navigation setup with fade transitions</li>
+<li>Theme application (system/light/dark)</li>
+<li>Font scale application</li>
+<li>Keyboard auto-dismiss on navigation</li>
+</ul>
+<h3 id="key-methods">Key Methods<a class="headerlink" href="#key-methods" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>onCreate()</code></td>
+<td>Sets up navigation, bottom nav, NFC, handles launch intent</td>
+</tr>
+<tr>
+<td><code>onNewIntent(Intent)</code></td>
+<td>Receives NFC intents when app is in foreground</td>
+</tr>
+<tr>
+<td><code>handleIntent(Intent)</code></td>
+<td>Extracts NFC tag ID, triggers product lookup via ViewModel</td>
+</tr>
+<tr>
+<td><code>setupNfc()</code></td>
+<td>Initializes NfcAdapter and PendingIntent for foreground dispatch</td>
+</tr>
+<tr>
+<td><code>applyFontScale()</code></td>
+<td>Reads font size from prefs, applies to Configuration</td>
+</tr>
+<tr>
+<td><code>showNfcDisabledDialog()</code></td>
+<td>Prompts user to enable NFC in system settings</td>
+</tr>
+</tbody>
+</table>
+<h3 id="nfc-flow">NFC Flow<a class="headerlink" href="#nfc-flow" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="n">onNewIntent</span><span class="p">(</span><span class="n">intent</span><span class="p">)</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">  </span><span class="err">→</span><span class="w"> </span><span class="n">setIntent</span><span class="p">(</span><span class="n">intent</span><span class="p">)</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">  </span><span class="err">→</span><span class="w"> </span><span class="n">handleIntent</span><span class="p">(</span><span class="n">intent</span><span class="p">)</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">    </span><span class="err">→</span><span class="w"> </span><span class="n">NfcHelper</span><span class="p">.</span><span class="na">getTagId</span><span class="p">(</span><span class="n">tag</span><span class="p">)</span><span class="w">  </span><span class="c1">// extract UID hex</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">    </span><span class="err">→</span><span class="w"> </span><span class="n">homeViewModel</span><span class="p">.</span><span class="na">lookupProductByTagId</span><span class="p">(</span><span class="n">tagId</span><span class="p">)</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="w">    </span><span class="c1">// Sound + vibration handled in HomeFragment observers</span>
+</code></pre></div>
+<hr />
+<h2 id="splashfragment">SplashFragment<a class="headerlink" href="#splashfragment" title="Permanent link">&para;</a></h2>
+<p><strong>Path:</strong> <code>ui/splash/SplashFragment.java</code></p>
+<p>Animated splash screen with icon bounce, circle expand, ring ripple, title slide-up.</p>
+<h3 id="key-behavior">Key Behavior<a class="headerlink" href="#key-behavior" title="Permanent link">&para;</a></h3>
+<ul>
+<li>AnimatorSet with 4 animation phases</li>
+<li>Tap anywhere to skip</li>
+<li>Auto-navigate after 4.5 seconds</li>
+<li><strong>Skips entirely if launched via NFC intent</strong> (background scan)</li>
+<li><code>hasNavigated</code> flag prevents double navigation</li>
+</ul>
+<hr />
+<h2 id="welcomefragment">WelcomeFragment<a class="headerlink" href="#welcomefragment" title="Permanent link">&para;</a></h2>
+<p><strong>Path:</strong> <code>ui/welcome/WelcomeFragment.java</code></p>
+<p>Onboarding screen shown on first launch only.</p>
+<h3 id="collects">Collects<a class="headerlink" href="#collects" title="Permanent link">&para;</a></h3>
+<ul>
+<li>User name (required — button disabled until entered)</li>
+<li>Dietary restrictions (chip toggles)</li>
+<li>Language preference (English/Arabic — switches immediately)</li>
+</ul>
+<h3 id="key-logic">Key Logic<a class="headerlink" href="#key-logic" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">prefs</span><span class="p">.</span><span class="na">isFirstLaunch</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">    </span><span class="c1">// Skip to home</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">    </span><span class="n">Navigation</span><span class="p">.</span><span class="na">findNavController</span><span class="p">(</span><span class="n">view</span><span class="p">).</span><span class="na">navigate</span><span class="p">(</span><span class="n">R</span><span class="p">.</span><span class="na">id</span><span class="p">.</span><span class="na">action_welcome_to_home</span><span class="p">);</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">    </span><span class="k">return</span><span class="p">;</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="p">}</span>
+</code></pre></div>
+<hr />
+<h2 id="homefragment">HomeFragment<a class="headerlink" href="#homefragment" title="Permanent link">&para;</a></h2>
+<p><strong>Path:</strong> <code>ui/home/HomeFragment.java</code></p>
+<p>Main screen with scan area, search bar, recent scans, tutorial.</p>
+<h3 id="key-methods_1">Key Methods<a class="headerlink" href="#key-methods_1" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>onViewCreated()</code></td>
+<td>Binds views, sets greeting, observers, tutorial</td>
+</tr>
+<tr>
+<td><code>playScanSound(boolean)</code></td>
+<td>Plays success chime or error tone + vibration</td>
+</tr>
+<tr>
+<td><code>showSimulateDialog()</code></td>
+<td>Shows product picker for emulator testing</td>
+</tr>
+<tr>
+<td><code>startNfcPulse()</code></td>
+<td>Starts pulsing animation on NFC icon</td>
+</tr>
+</tbody>
+</table>
+<h3 id="observers">Observers<a class="headerlink" href="#observers" title="Permanent link">&para;</a></h3>
+<ul>
+<li><code>getScannedProduct()</code> → navigate to ProductDetail + success sound</li>
+<li><code>getScanError()</code> → snackbar + error sound</li>
+<li><code>getRecentScans()</code> → update RecyclerView</li>
+<li><code>getSearchNotFound()</code> → snackbar</li>
+</ul>
+<hr />
+<h2 id="productdetailfragment">ProductDetailFragment<a class="headerlink" href="#productdetailfragment" title="Permanent link">&para;</a></h2>
+<p><strong>Path:</strong> <code>ui/product/ProductDetailFragment.java</code></p>
+<p>Full product information with TTS and AI recommendations.</p>
+<h3 id="key-methods_2">Key Methods<a class="headerlink" href="#key-methods_2" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>speakProductInfo(Product)</code></td>
+<td>Chains TTS: name → nutrition → ingredients → allergens → recs</td>
+</tr>
+<tr>
+<td><code>speakRecommendationsOnly(List)</code></td>
+<td>Speaks just recommendations (called when they load late)</td>
+</tr>
+<tr>
+<td><code>showRecommendationBottomSheet(Recommendation)</code></td>
+<td>Full nutrition bottom sheet + auto-speak</td>
+</tr>
+<tr>
+<td><code>autoReadProduct()</code></td>
+<td>Triggered after allergen warning finishes</td>
+</tr>
+</tbody>
+</table>
+<h3 id="tts-chain">TTS Chain<a class="headerlink" href="#tts-chain" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="n">speakThenRun</span><span class="p">(</span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="o">-&gt;</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">  </span><span class="n">speakThenRun</span><span class="p">(</span><span class="n">nutrition</span><span class="p">,</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="o">-&gt;</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">    </span><span class="n">speakThenRun</span><span class="p">(</span><span class="n">allergens</span><span class="p">,</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="o">-&gt;</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">      </span><span class="n">speakRecommendationsOnly</span><span class="p">(</span><span class="n">recs</span><span class="p">)</span>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="w">    </span><span class="p">)</span>
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="w">  </span><span class="p">)</span>
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="p">)</span>
+</code></pre></div>
+<h3 id="flags">Flags<a class="headerlink" href="#flags" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Flag</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>hasAutoRead</code></td>
+<td>Prevents double auto-read on same product</td>
+</tr>
+<tr>
+<td><code>productSpoken</code></td>
+<td>Tracks if product info was spoken</td>
+</tr>
+<tr>
+<td><code>recsSpoken</code></td>
+<td>Tracks if recommendations were spoken</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="historyfragment">HistoryFragment<a class="headerlink" href="#historyfragment" title="Permanent link">&para;</a></h2>
+<p><strong>Path:</strong> <code>ui/history/HistoryFragment.java</code></p>
+<p>Scan history with filter chips (All, Allergens, Safe, Today).</p>
+<h3 id="key-features">Key Features<a class="headerlink" href="#key-features" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Filter chips with <code>selectionRequired="true"</code></li>
+<li>Clear history with confirmation dialog</li>
+<li>Background thread loads product data for each scan entry</li>
+<li><code>isAdded()</code> + <code>getView().post()</code> guards for thread safety</li>
+</ul>
+<hr />
+<h2 id="settingsfragment">SettingsFragment<a class="headerlink" href="#settingsfragment" title="Permanent link">&para;</a></h2>
+<p><strong>Path:</strong> <code>ui/settings/SettingsFragment.java</code></p>
+<p>All app preferences in one screen.</p>
+<h3 id="settings">Settings<a class="headerlink" href="#settings" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Setting</th>
+<th>Type</th>
+<th>Values</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Name</td>
+<td>TextInput</td>
+<td>Free text</td>
+</tr>
+<tr>
+<td>Dietary Profile</td>
+<td>Filter Chips</td>
+<td>dairy-free, gluten-free, low-sodium, vegan, nut-allergy</td>
+</tr>
+<tr>
+<td>Theme</td>
+<td>Chips</td>
+<td>System / Light / Dark</td>
+</tr>
+<tr>
+<td>Font Size</td>
+<td>Chips</td>
+<td>Small / Medium / Large</td>
+</tr>
+<tr>
+<td>Speech Speed</td>
+<td>Chips</td>
+<td>x0.5 / x1 / x1.5</td>
+</tr>
+<tr>
+<td>Auto TTS</td>
+<td>Switch</td>
+<td>On / Off</td>
+</tr>
+<tr>
+<td>AI Recommendations</td>
+<td>Switch</td>
+<td>On / Off</td>
+</tr>
+<tr>
+<td>Reset Tutorial</td>
+<td>Button</td>
+<td>Resets all tutorial flags</td>
+</tr>
+<tr>
+<td>Reset Defaults</td>
+<td>Button</td>
+<td>Clears all prefs (with confirmation)</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="adapters">Adapters<a class="headerlink" href="#adapters" title="Permanent link">&para;</a></h2>
+<h3 id="recentscanadapter">RecentScanAdapter<a class="headerlink" href="#recentscanadapter" title="Permanent link">&para;</a></h3>
+<p><strong>Path:</strong> <code>ui/adapter/RecentScanAdapter.java</code></p>
+<p>Displays last 5 scanned products on home screen. Uses background executor + <code>view.post()</code> for sync product lookup.</p>
+<h3 id="historyadapter">HistoryAdapter<a class="headerlink" href="#historyadapter" title="Permanent link">&para;</a></h3>
+<p><strong>Path:</strong> <code>ui/adapter/HistoryAdapter.java</code></p>
+<p>Full history list with allergen/safe badges. Inner <code>HistoryItem</code> class combines <code>ScanHistory</code> + <code>Product</code>.</p>
+<h3 id="recommendationadapter">RecommendationAdapter<a class="headerlink" href="#recommendationadapter" title="Permanent link">&para;</a></h3>
+<p><strong>Path:</strong> <code>ui/adapter/RecommendationAdapter.java</code></p>
+<p>AI recommendation cards. Shows English name, Arabic name (if available), reason, match percentage bar. Detects language for display.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.sections", "navigation.expand", "navigation.top", "search.suggest", "content.code.copy"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

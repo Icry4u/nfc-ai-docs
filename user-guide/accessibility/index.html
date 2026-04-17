@@ -1,0 +1,1864 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Documentation for the NFC-AI Smart Shopping Assistant — Senior Project, Saudi Electronic University">
+      
+      
+      
+      
+        <link rel="prev" href="../settings/">
+      
+      
+        <link rel="next" href="../../architecture/overview/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>Accessibility - NFC-AI: Smart Shopping Assistant</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="amber">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#accessibility-features" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="NFC-AI: Smart Shopping Assistant" class="md-header__button md-logo" aria-label="NFC-AI: Smart Shopping Assistant" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            NFC-AI: Smart Shopping Assistant
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Accessibility
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../getting-started/" class="md-tabs__link">
+          
+  
+  
+  User Guide
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../architecture/overview/" class="md-tabs__link">
+          
+  
+  
+  Architecture
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../api/" class="md-tabs__link">
+          
+  
+  
+  API Reference
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../discussion/qa-guide/" class="md-tabs__link">
+          
+  
+  
+  Discussion Prep
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="NFC-AI: Smart Shopping Assistant" class="md-nav__button md-logo" aria-label="NFC-AI: Smart Shopping Assistant" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    NFC-AI: Smart Shopping Assistant
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    User Guide
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    User Guide
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../getting-started/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Getting Started
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../nfc-scanning/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NFC Scanning
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ai-recommendations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AI Recommendations
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../text-to-speech/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Text-to-Speech
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../settings/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Settings & Preferences
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Accessibility
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Accessibility
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#text-to-speech-with-neural-voice" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Text-to-Speech with Neural Voice
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Text-to-Speech with Neural Voice">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#arabic-pronunciation-with-tashkeel" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Arabic Pronunciation with Tashkeel
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#haptic-feedback" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Haptic Feedback
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#high-contrast-allergen-badges" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        High-Contrast Allergen Badges
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#rtl-and-arabic-support" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        RTL and Arabic Support
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#large-font-option" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Large Font Option
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dark-mode" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Dark Mode
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#speech-speed-control" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Speech Speed Control
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#speak-aloud-button-always-available" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Speak Aloud Button (Always Available)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#accessibility-summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Accessibility Summary
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tips-for-visually-impaired-users" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tips for Visually Impaired Users
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#next-steps" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Next Steps
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Architecture
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Architecture
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../architecture/overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../architecture/data-flow/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Data Flow
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../architecture/nfc-system/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NFC System
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../architecture/ai-pipeline/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AI Pipeline
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../architecture/tts-engine/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    TTS Engine
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../architecture/database/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Database
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Reference
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    API Reference
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Package Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/ui/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UI Layer
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/data/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Data Layer
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/network/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Network Layer
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/utilities/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Utilities
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/viewmodels/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ViewModels
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Discussion Prep
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Discussion Prep
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../discussion/qa-guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Q&A Guide
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../discussion/technical-decisions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Technical Decisions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../quiz.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Committee Quiz
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#text-to-speech-with-neural-voice" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Text-to-Speech with Neural Voice
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Text-to-Speech with Neural Voice">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#arabic-pronunciation-with-tashkeel" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Arabic Pronunciation with Tashkeel
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#haptic-feedback" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Haptic Feedback
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#high-contrast-allergen-badges" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        High-Contrast Allergen Badges
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#rtl-and-arabic-support" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        RTL and Arabic Support
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#large-font-option" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Large Font Option
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dark-mode" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Dark Mode
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#speech-speed-control" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Speech Speed Control
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#speak-aloud-button-always-available" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Speak Aloud Button (Always Available)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#accessibility-summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Accessibility Summary
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tips-for-visually-impaired-users" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tips for Visually Impaired Users
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#next-steps" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Next Steps
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="accessibility-features">Accessibility Features<a class="headerlink" href="#accessibility-features" title="Permanent link">&para;</a></h1>
+<p>NFC-AI: Smart Shopping Assistant was designed with accessibility as a core
+priority. Many features are built specifically to support <strong>visually impaired
+users</strong>, but they benefit everyone. This page describes the accessibility
+features available throughout the app.</p>
+<hr />
+<h2 id="text-to-speech-with-neural-voice">Text-to-Speech with Neural Voice<a class="headerlink" href="#text-to-speech-with-neural-voice" title="Permanent link">&para;</a></h2>
+<p>The app uses <strong>Edge TTS neural voices</strong> to produce natural, human-like speech.
+This is a significant improvement over robotic-sounding synthesized voices.</p>
+<ul>
+<li>Neural voices have natural intonation, rhythm, and emphasis.</li>
+<li>Both <strong>Arabic</strong> and <strong>English</strong> are supported with high-quality voices.</li>
+<li>Product information is read in a logical order: name, nutrition, ingredients,
+  allergens, and recommendations.</li>
+<li>If a conflicting allergen is detected, the <strong>allergen warning is spoken first</strong>
+  as an immediate safety alert.</li>
+</ul>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>If you rely on TTS as your primary way of receiving product information,
+enable <strong>Auto TTS</strong> in Settings so every scan is read aloud automatically.</p>
+</div>
+<h3 id="arabic-pronunciation-with-tashkeel">Arabic Pronunciation with Tashkeel<a class="headerlink" href="#arabic-pronunciation-with-tashkeel" title="Permanent link">&para;</a></h3>
+<p>Arabic text-to-speech includes <strong>tashkeel</strong> (diacritical marks such as fatha,
+kasra, damma, and sukun) to ensure correct pronunciation. These marks indicate
+short vowels and other pronunciation details essential for accurate Arabic
+speech.</p>
+<ul>
+<li>Tashkeel is <strong>included in the text sent to the speech engine</strong> for precise
+  pronunciation.</li>
+<li>Tashkeel is <strong>stripped from the on-screen display</strong> to keep the interface
+  clean and readable.</li>
+</ul>
+<p>This means you hear correctly pronounced Arabic while the visual text remains
+uncluttered — the best of both approaches.</p>
+<hr />
+<h2 id="haptic-feedback">Haptic Feedback<a class="headerlink" href="#haptic-feedback" title="Permanent link">&para;</a></h2>
+<p>The app uses vibration to communicate scan results through touch:</p>
+<ul>
+<li><strong>Successful scan</strong> — A short vibration pulse confirms the NFC tag was read.</li>
+<li><strong>Failed scan</strong> — A different vibration pattern indicates an error.</li>
+</ul>
+<p>Haptic feedback works alongside audio cues (chime for success, error tone for
+failure), giving you two forms of non-visual confirmation for every scan.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Haptic feedback relies on your phone's vibration motor. Make sure vibration
+is enabled in your phone's system settings for this feature to work.</p>
+</div>
+<hr />
+<h2 id="high-contrast-allergen-badges">High-Contrast Allergen Badges<a class="headerlink" href="#high-contrast-allergen-badges" title="Permanent link">&para;</a></h2>
+<p>Allergen information is displayed using <strong>color-coded badges</strong> designed for
+maximum visibility:</p>
+<table>
+<thead>
+<tr>
+<th>Badge Color</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Red</strong></td>
+<td><strong>Danger.</strong> This allergen conflicts with your dietary profile.</td>
+</tr>
+<tr>
+<td><strong>Green</strong></td>
+<td><strong>Safe.</strong> This allergen is present but does not conflict with your profile.</td>
+</tr>
+</tbody>
+</table>
+<p>The badges use high-contrast colors that are easy to distinguish, even for
+users with reduced vision. The text on each badge clearly names the allergen.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Red allergen badges indicate a direct conflict with your dietary profile.
+If you see a red badge (or hear an allergen warning via TTS), exercise
+caution with that product.</p>
+</div>
+<hr />
+<h2 id="rtl-and-arabic-support">RTL and Arabic Support<a class="headerlink" href="#rtl-and-arabic-support" title="Permanent link">&para;</a></h2>
+<p>The app fully supports <strong>right-to-left (RTL) layout</strong> for Arabic language users:</p>
+<ul>
+<li>All text, layouts, and navigation elements are mirrored appropriately when
+  Arabic is selected as the language.</li>
+<li><strong>Bidirectional (BiDi) text</strong> is handled correctly, meaning mixed Arabic and
+  English content (such as brand names in English within Arabic text) displays
+  in the proper reading order.</li>
+<li>Product names, ingredients, and allergens appear in the correct direction
+  based on the language.</li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>When you switch the app language to Arabic, the entire interface flips to
+RTL layout. Buttons, menus, and navigation all adjust to follow natural
+Arabic reading direction (right to left).</p>
+</div>
+<hr />
+<h2 id="large-font-option">Large Font Option<a class="headerlink" href="#large-font-option" title="Permanent link">&para;</a></h2>
+<p>The app offers three font size settings: <strong>Small</strong>, <strong>Medium</strong>, and <strong>Large</strong>.</p>
+<p>The <strong>Large</strong> font size is specifically recommended for users with low vision:</p>
+<ul>
+<li>All text throughout the app scales up, including product names, nutrition
+  values, ingredient lists, and allergen badges.</li>
+<li>Button labels and menu items also increase in size.</li>
+<li>The layout adapts to accommodate larger text without cutting off information.</li>
+</ul>
+<p>Change the font size in <strong>Settings &gt; Font Size</strong>.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Combine the Large font setting with the Dark theme for the highest
+readability in most lighting conditions.</p>
+</div>
+<hr />
+<h2 id="dark-mode">Dark Mode<a class="headerlink" href="#dark-mode" title="Permanent link">&para;</a></h2>
+<p>Dark mode reduces screen brightness and uses light text on dark backgrounds:</p>
+<ul>
+<li><strong>Reduces eye strain</strong> in low-light environments.</li>
+<li><strong>Improves readability</strong> for users with light sensitivity.</li>
+<li><strong>Saves battery</strong> on phones with OLED screens.</li>
+</ul>
+<p>Three theme options are available:</p>
+<table>
+<thead>
+<tr>
+<th>Theme</th>
+<th>Behavior</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>System</strong></td>
+<td>Matches your phone's system-wide dark/light setting automatically.</td>
+</tr>
+<tr>
+<td><strong>Light</strong></td>
+<td>Always uses a light background.</td>
+</tr>
+<tr>
+<td><strong>Dark</strong></td>
+<td>Always uses a dark background with light text.</td>
+</tr>
+</tbody>
+</table>
+<p>Change the theme in <strong>Settings &gt; Theme</strong>.</p>
+<hr />
+<h2 id="speech-speed-control">Speech Speed Control<a class="headerlink" href="#speech-speed-control" title="Permanent link">&para;</a></h2>
+<p>Users who need more time to process spoken information can slow down the
+TTS voice:</p>
+<table>
+<thead>
+<tr>
+<th>Speed</th>
+<th>Use Case</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>x0.5</strong></td>
+<td>Best for users who need extra time to process each piece of information.</td>
+</tr>
+<tr>
+<td><strong>x1.0</strong></td>
+<td>Standard speed for general use.</td>
+</tr>
+<tr>
+<td><strong>x1.5</strong></td>
+<td>For experienced users who are comfortable with faster speech.</td>
+</tr>
+</tbody>
+</table>
+<p>Change the speed in <strong>Settings &gt; Speech Speed</strong>.</p>
+<hr />
+<h2 id="speak-aloud-button-always-available">Speak Aloud Button (Always Available)<a class="headerlink" href="#speak-aloud-button-always-available" title="Permanent link">&para;</a></h2>
+<p>The floating action button (FAB) for speaking product information is <strong>always
+accessible</strong> on the product detail screen, regardless of other settings:</p>
+<ul>
+<li>It works even when Auto TTS is turned off.</li>
+<li>It provides an on-demand way to hear all product information.</li>
+<li>It is positioned in a consistent, easy-to-find location on screen.</li>
+</ul>
+<hr />
+<h2 id="accessibility-summary">Accessibility Summary<a class="headerlink" href="#accessibility-summary" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Feature</th>
+<th>Benefit</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Neural TTS voices</td>
+<td>Natural speech that is easy to understand.</td>
+</tr>
+<tr>
+<td>Arabic tashkeel</td>
+<td>Correct Arabic pronunciation without visual clutter.</td>
+</tr>
+<tr>
+<td>Haptic feedback</td>
+<td>Non-visual scan confirmation through vibration.</td>
+</tr>
+<tr>
+<td>High-contrast badges</td>
+<td>Clear red/green allergen indicators.</td>
+</tr>
+<tr>
+<td>RTL Arabic layout</td>
+<td>Proper right-to-left interface for Arabic speakers.</td>
+</tr>
+<tr>
+<td>BiDi text support</td>
+<td>Mixed Arabic/English text displays correctly.</td>
+</tr>
+<tr>
+<td>Large font option</td>
+<td>Scalable text for low-vision users.</td>
+</tr>
+<tr>
+<td>Dark mode</td>
+<td>Reduced glare and improved readability.</td>
+</tr>
+<tr>
+<td>Speech speed control</td>
+<td>Adjustable pace for listening comfort.</td>
+</tr>
+<tr>
+<td>Allergen-first TTS</td>
+<td>Safety warnings spoken before other content.</td>
+</tr>
+<tr>
+<td>Speak Aloud FAB</td>
+<td>On-demand TTS available at all times.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="tips-for-visually-impaired-users">Tips for Visually Impaired Users<a class="headerlink" href="#tips-for-visually-impaired-users" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Enable <strong>Auto TTS</strong> so every scan is read aloud without needing to find and
+  tap a button.</li>
+<li>Set speech speed to <strong>x0.5</strong> or <strong>x1.0</strong> until you are familiar with the
+  information structure.</li>
+<li>Use the <strong>Large</strong> font size and <strong>Dark</strong> theme together for best on-screen
+  visibility.</li>
+<li>Rely on <strong>haptic feedback</strong> to confirm successful scans without looking at
+  the screen.</li>
+<li>Keep your <strong>dietary profile accurate</strong> so allergen warnings are always
+  relevant to your needs.</li>
+</ul>
+<hr />
+<h2 id="next-steps">Next Steps<a class="headerlink" href="#next-steps" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Set up your preferences in <a href="../settings/">Settings</a>.</li>
+<li>Learn the basics in <a href="../getting-started/">Getting Started</a>.</li>
+<li>Explore <a href="../text-to-speech/">Text-to-Speech</a> configuration options.</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.sections", "navigation.expand", "navigation.top", "search.suggest", "content.code.copy"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

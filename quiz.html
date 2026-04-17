@@ -1,0 +1,1550 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NFC-AI — Committee Discussion Simulator</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    background: #0f1117;
+    color: #e0e0e0;
+    min-height: 100vh;
+  }
+
+  header {
+    background: #1a1d27;
+    border-bottom: 2px solid #00897b;
+    padding: 18px 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+
+  header h1 { font-size: 1.1rem; color: #4db6ac; font-weight: 600; }
+  header span { font-size: 0.85rem; color: #888; }
+
+  .progress-bar {
+    width: 100%;
+    height: 4px;
+    background: #1e2130;
+  }
+  .progress-fill {
+    height: 4px;
+    background: linear-gradient(90deg, #00897b, #4db6ac);
+    transition: width 0.4s ease;
+  }
+
+  /* SCREENS */
+  .screen { display: none; }
+  .screen.active { display: block; }
+
+  /* START SCREEN */
+  #start-screen {
+    max-width: 700px;
+    margin: 60px auto;
+    padding: 0 24px;
+    text-align: center;
+  }
+
+  .badge {
+    display: inline-block;
+    background: #00897b22;
+    color: #4db6ac;
+    border: 1px solid #00897b55;
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-size: 0.78rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 24px;
+  }
+
+  #start-screen h2 {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 12px;
+    line-height: 1.3;
+  }
+
+  #start-screen p {
+    color: #999;
+    font-size: 1rem;
+    margin-bottom: 40px;
+    line-height: 1.7;
+  }
+
+  .filter-label {
+    font-size: 0.85rem;
+    color: #888;
+    margin-bottom: 16px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .student-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-bottom: 32px;
+  }
+
+  .student-card {
+    background: #1a1d27;
+    border: 1px solid #2a2d3a;
+    border-radius: 12px;
+    padding: 16px 12px;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-align: center;
+  }
+
+  .student-card:hover { border-color: #00897b; background: #1e2433; }
+  .student-card.selected { border-color: #00897b; background: #00897b22; }
+
+  .student-card .avatar {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    margin: 0 auto 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    font-weight: 700;
+  }
+
+  .student-card .name { font-size: 0.8rem; color: #ccc; font-weight: 600; }
+  .student-card .role { font-size: 0.7rem; color: #666; margin-top: 4px; }
+
+  .start-btn {
+    background: #00897b;
+    color: #fff;
+    border: none;
+    padding: 16px 48px;
+    border-radius: 10px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s;
+    width: 100%;
+    max-width: 300px;
+  }
+
+  .start-btn:hover { background: #00796b; }
+
+  .stats-row {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    margin-bottom: 40px;
+  }
+
+  .stat {
+    background: #1a1d27;
+    border: 1px solid #2a2d3a;
+    border-radius: 10px;
+    padding: 14px 24px;
+    text-align: center;
+  }
+
+  .stat .num { font-size: 1.6rem; font-weight: 700; color: #4db6ac; }
+  .stat .lbl { font-size: 0.72rem; color: #666; text-transform: uppercase; margin-top: 2px; }
+
+  /* QUIZ SCREEN */
+  #quiz-screen {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 40px 24px;
+  }
+
+  .committee-bar {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 32px;
+    background: #1a1d27;
+    border: 1px solid #2a2d3a;
+    border-radius: 12px;
+    padding: 14px 20px;
+  }
+
+  .committee-avatar {
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    background: #00897b22;
+    border: 2px solid #00897b;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.3rem;
+    flex-shrink: 0;
+  }
+
+  .committee-info .title { font-size: 0.78rem; color: #00897b; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
+  .committee-info .name { font-size: 0.92rem; color: #ccc; }
+
+  .q-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 14px;
+  }
+
+  .q-category {
+    background: #1e2433;
+    color: #4db6ac;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.72rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .q-counter { font-size: 0.8rem; color: #555; }
+
+  .question-text {
+    font-size: 1.15rem;
+    color: #fff;
+    font-weight: 500;
+    line-height: 1.6;
+    margin-bottom: 28px;
+    background: #1a1d27;
+    border-left: 3px solid #00897b;
+    padding: 18px 20px;
+    border-radius: 0 10px 10px 0;
+  }
+
+  .options {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 28px;
+  }
+
+  .option {
+    background: #1a1d27;
+    border: 1px solid #2a2d3a;
+    border-radius: 10px;
+    padding: 16px 20px;
+    cursor: pointer;
+    transition: all 0.15s;
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+  }
+
+  .option:hover:not(.locked) { border-color: #4db6ac; background: #1e2433; }
+
+  .option .opt-letter {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: #2a2d3a;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.78rem;
+    font-weight: 700;
+    flex-shrink: 0;
+    color: #888;
+  }
+
+  .option .opt-text { font-size: 0.95rem; color: #ccc; line-height: 1.5; padding-top: 3px; }
+
+  .option.selected { border-color: #4db6ac; background: #0d2a26; }
+  .option.selected .opt-letter { background: #00897b; color: #fff; }
+  .option.selected .opt-text { color: #fff; }
+
+  .option.strongest { border-color: #43a047; background: #0a1f0a; }
+  .option.strongest .opt-letter { background: #43a047; color: #fff; }
+  .option.strongest .opt-text { color: #c8e6c9; }
+
+  .option.weak { border-color: #e53935; background: #1f0a0a; }
+  .option.weak .opt-letter { background: #e53935; color: #fff; }
+  .option.weak .opt-text { color: #ffcdd2; }
+
+  .option.moderate { border-color: #fb8c00; background: #1f1300; }
+  .option.moderate .opt-letter { background: #fb8c00; color: #fff; }
+  .option.moderate .opt-text { color: #ffe0b2; }
+
+  .option.locked { cursor: default; }
+
+  /* FEEDBACK */
+  .feedback {
+    display: none;
+    background: #1a1d27;
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 24px;
+    border: 1px solid #2a2d3a;
+  }
+
+  .feedback.show { display: block; }
+
+  .feedback-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 14px;
+  }
+
+  .feedback-badge {
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+  }
+
+  .badge-excellent { background: #1b5e2033; color: #66bb6a; border: 1px solid #2e7d32; }
+  .badge-good { background: #e65100; color: #ffcc80; border: 1px solid #ef6c00; background: #3e1f0033; }
+  .badge-weak { background: #b71c1c33; color: #ef9a9a; border: 1px solid #c62828; }
+
+  .committee-reaction {
+    font-size: 0.9rem;
+    color: #aaa;
+    line-height: 1.6;
+    font-style: italic;
+    margin-bottom: 14px;
+    padding: 12px 16px;
+    background: #12141c;
+    border-radius: 8px;
+    border-left: 3px solid #555;
+  }
+
+  .committee-reaction::before {
+    content: '💬 Committee: ';
+    color: #4db6ac;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 0.82rem;
+  }
+
+  .best-answer-note {
+    font-size: 0.85rem;
+    color: #888;
+    line-height: 1.5;
+  }
+
+  .best-answer-note strong { color: #66bb6a; }
+
+  /* NEXT BUTTON */
+  .nav-row {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+  }
+
+  .next-btn {
+    background: #00897b;
+    color: #fff;
+    border: none;
+    padding: 13px 36px;
+    border-radius: 10px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: none;
+    transition: background 0.2s;
+  }
+
+  .next-btn:hover { background: #00796b; }
+  .next-btn.show { display: block; }
+
+  /* RESULTS SCREEN */
+  #results-screen {
+    max-width: 720px;
+    margin: 60px auto;
+    padding: 0 24px;
+    text-align: center;
+  }
+
+  .score-circle {
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    border: 6px solid #00897b;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 32px;
+    background: #00897b11;
+  }
+
+  .score-circle .score-num { font-size: 2.4rem; font-weight: 800; color: #4db6ac; }
+  .score-circle .score-lbl { font-size: 0.72rem; color: #888; text-transform: uppercase; }
+
+  #results-screen h2 { font-size: 1.5rem; color: #fff; margin-bottom: 10px; }
+  #results-screen .subtitle { color: #888; margin-bottom: 40px; font-size: 0.95rem; }
+
+  .category-breakdown {
+    text-align: left;
+    margin-bottom: 40px;
+  }
+
+  .category-breakdown h3 { font-size: 0.85rem; color: #888; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 16px; }
+
+  .cat-row {
+    background: #1a1d27;
+    border: 1px solid #2a2d3a;
+    border-radius: 10px;
+    padding: 14px 18px;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .cat-name { flex: 1; font-size: 0.9rem; color: #ccc; }
+  .cat-bar-wrap { flex: 2; height: 6px; background: #2a2d3a; border-radius: 3px; }
+  .cat-bar { height: 6px; border-radius: 3px; transition: width 0.6s ease; }
+  .cat-score { font-size: 0.82rem; color: #888; width: 50px; text-align: right; }
+
+  .results-actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+
+  .btn-outline {
+    background: transparent;
+    color: #4db6ac;
+    border: 1px solid #00897b;
+    padding: 13px 28px;
+    border-radius: 10px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .btn-outline:hover { background: #00897b22; }
+
+  .btn-primary {
+    background: #00897b;
+    color: #fff;
+    border: none;
+    padding: 13px 28px;
+    border-radius: 10px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+
+  .btn-primary:hover { background: #00796b; }
+
+  .level-tag {
+    display: inline-block;
+    padding: 6px 18px;
+    border-radius: 20px;
+    font-size: 0.82rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+
+  .tag-excellent { background: #1b5e2033; color: #66bb6a; border: 1px solid #2e7d32; }
+  .tag-good { background: #1a237e33; color: #90caf9; border: 1px solid #1565c0; }
+  .tag-review { background: #b71c1c33; color: #ef9a9a; border: 1px solid #c62828; }
+
+  @media (max-width: 600px) {
+    .student-grid { grid-template-columns: repeat(2, 1fr); }
+    .stats-row { flex-wrap: wrap; }
+    .question-text { font-size: 1rem; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>🎓 NFC-AI — Committee Simulator</h1>
+  <div style="display:flex;align-items:center;gap:16px;">
+    <span id="header-info">Senior Project Defense Prep</span>
+    <a href="." style="background:#1a1d27;color:#4db6ac;border:1px solid #00897b55;padding:6px 14px;border-radius:8px;font-size:0.8rem;text-decoration:none;white-space:nowrap;">← Back to Docs</a>
+  </div>
+</header>
+<div class="progress-bar"><div class="progress-fill" id="progress-fill" style="width:0%"></div></div>
+
+<!-- START SCREEN -->
+<div id="start-screen" class="screen active">
+  <div class="badge">Discussion Preparation</div>
+  <h2>Committee Discussion<br>Simulator</h2>
+  <p>Practice answering the questions the committee will actually ask.<br>
+  Pick your focus area or do all 40 questions. There are no wrong answers — only strong and weak ones.</p>
+
+  <div class="stats-row">
+    <div class="stat"><div class="num">40</div><div class="lbl">Questions</div></div>
+    <div class="stat"><div class="num">8</div><div class="lbl">Categories</div></div>
+    <div class="stat"><div class="num">~15min</div><div class="lbl">Full session</div></div>
+  </div>
+
+  <div class="filter-label">Filter by student focus area (or do all)</div>
+  <div class="student-grid">
+    <div class="student-card selected" data-filter="all" onclick="selectFilter(this,'all')">
+      <div class="avatar" style="background:#00897b22;color:#4db6ac;">All</div>
+      <div class="name">All Questions</div>
+      <div class="role">40 questions</div>
+    </div>
+    <div class="student-card" data-filter="s1" onclick="selectFilter(this,'s1')">
+      <div class="avatar" style="background:#1a237e22;color:#90caf9;">HA</div>
+      <div class="name">Hassan AlHassan</div>
+      <div class="role">NFC & Database</div>
+    </div>
+    <div class="student-card" data-filter="s2" onclick="selectFilter(this,'s2')">
+      <div class="avatar" style="background:#4a148c22;color:#ce93d8;">KH</div>
+      <div class="name">Khalid AlHelal</div>
+      <div class="role">AI & Recommendations</div>
+    </div>
+    <div class="student-card" data-filter="s3" onclick="selectFilter(this,'s3')">
+      <div class="avatar" style="background:#e65100 22;color:#ffcc80;">IA</div>
+      <div class="name">Ibrahim AlSayah</div>
+      <div class="role">UI & Navigation</div>
+    </div>
+    <div class="student-card" data-filter="s4" onclick="selectFilter(this,'s4')">
+      <div class="avatar" style="background:#b71c1c22;color:#ef9a9a;">MA</div>
+      <div class="name">Mohammed AlHajji</div>
+      <div class="role">Settings & Onboarding</div>
+    </div>
+    <div class="student-card" data-filter="s5" onclick="selectFilter(this,'s5')">
+      <div class="avatar" style="background:#1b5e2022;color:#a5d6a7;">AQ</div>
+      <div class="name">Ali AlQadhib</div>
+      <div class="role">Arabic & TTS</div>
+    </div>
+  </div>
+
+  <button class="start-btn" onclick="startQuiz()">Start Simulation →</button>
+</div>
+
+<!-- QUIZ SCREEN -->
+<div id="quiz-screen" class="screen">
+  <div class="committee-bar">
+    <div class="committee-avatar">👨‍💼</div>
+    <div class="committee-info">
+      <div class="title">Committee Member</div>
+      <div class="name" id="committee-name">Dr. Moner AlSader — Supervisor & Evaluator</div>
+    </div>
+  </div>
+
+  <div class="q-meta">
+    <span class="q-category" id="q-category">General</span>
+    <span class="q-counter" id="q-counter">Question 1 of 40</span>
+  </div>
+
+  <div class="question-text" id="question-text"></div>
+
+  <div class="options" id="options"></div>
+
+  <div class="feedback" id="feedback">
+    <div class="feedback-header">
+      <span class="feedback-badge" id="feedback-badge">Good</span>
+      <span style="font-size:0.82rem;color:#666;" id="feedback-title"></span>
+    </div>
+    <div class="committee-reaction" id="committee-reaction"></div>
+    <div class="best-answer-note" id="best-answer-note"></div>
+  </div>
+
+  <div class="nav-row">
+    <button class="next-btn" id="next-btn" onclick="nextQuestion()">Next Question →</button>
+  </div>
+</div>
+
+<!-- RESULTS SCREEN -->
+<div id="results-screen" class="screen">
+  <div class="score-circle">
+    <div class="score-num" id="final-score">0</div>
+    <div class="score-lbl">Strongest</div>
+  </div>
+  <div id="result-level" class="level-tag tag-good">Good Understanding</div>
+  <h2 id="result-heading">Good job!</h2>
+  <p class="subtitle" id="result-subtitle">Here's your breakdown by category</p>
+
+  <div class="category-breakdown">
+    <h3>Performance by Category</h3>
+    <div id="cat-breakdown"></div>
+  </div>
+
+  <div class="results-actions">
+    <button class="btn-outline" onclick="retryQuiz()">↩ Retry All</button>
+    <button class="btn-primary" onclick="restartToStart()">Change Focus →</button>
+  </div>
+</div>
+
+<script>
+const QUESTIONS = [
+  // ── APP OVERVIEW ──────────────────────────────────────────────
+  {
+    id:1, category:"App Overview", filters:["all","s1","s2","s3","s4","s5"],
+    committee: "Dr. Moner AlSader",
+    q: "What does your app do?",
+    options:[
+      {l:"A", t:"It's an NFC shopping app that reads product tags."},
+      {l:"B", t:"It's a shopping assistant for people with food allergies. You tap your phone on a product, it shows nutrition info, warns you about allergens matched to your profile, and suggests safe AI-verified alternatives — all read aloud for visually impaired users."},
+      {l:"C", t:"It uses AI and NFC to recommend food products."},
+      {l:"D", t:"It's a mobile app that scans NFC tags and looks up product information."}
+    ],
+    strongest:"B", moderate:"D", weak:"C",
+    reaction:{
+      A:"That's too vague. What problem does it solve? Who is it for?",
+      B:"Excellent. You covered the problem, the technology, the user benefit, and accessibility in one clear sentence.",
+      C:"Too surface-level. The committee already read the report — they need depth.",
+      D:"You described what it does technically but missed the why and who."
+    },
+    note:"The strongest answer always leads with the problem being solved, not the technology."
+  },
+  {
+    id:2, category:"App Overview", filters:["all","s1","s2","s3","s4","s5"],
+    committee: "Dr. Moner AlSader",
+    q: "Who is the target user for this app?",
+    options:[
+      {l:"A", t:"People who use smartphones at grocery stores."},
+      {l:"B", t:"Anyone who wants to know what's in their food."},
+      {l:"C", t:"People with food allergies and visually impaired users who struggle to safely read small ingredient labels."},
+      {l:"D", t:"Gym users and health-conscious people tracking nutrition."}
+    ],
+    strongest:"C", moderate:"A", weak:"B",
+    reaction:{
+      A:"Too broad. Every app targets smartphone users.",
+      B:"Even broader. This doesn't show you thought about a specific problem.",
+      C:"Exactly right. Two clear groups with a clear shared problem.",
+      D:"That's a different app. This answer shows a misunderstanding of the project."
+    },
+    note:"Target user = specific group + specific problem they have."
+  },
+  {
+    id:3, category:"App Overview", filters:["all","s3","s4"],
+    committee: "Dr. Moner AlSader",
+    q: "What makes this app different from other food apps like Yummly or Open Food Facts?",
+    options:[
+      {l:"A", t:"It works in Arabic."},
+      {l:"B", t:"Three things: NFC touch scanning instead of camera, AI that verifies safety before suggesting alternatives, and neural voice readout in Arabic and English — all designed for users who can't safely read labels themselves."},
+      {l:"C", t:"It has AI recommendations and NFC technology."},
+      {l:"D", t:"It's focused on Saudi market products."}
+    ],
+    strongest:"B", moderate:"D", weak:"A",
+    reaction:{
+      A:"That's a feature, not a differentiator. Many apps support Arabic.",
+      B:"Perfect. Three concrete, specific differentiators with a clear connection to the user need.",
+      C:"These are just technology names, not benefits. Why do those matter?",
+      D:"That's a valid point but incomplete — say what you do better, not just what market you're in."
+    },
+    note:"Differentiation = what you do that others don't + why it matters."
+  },
+  {
+    id:4, category:"App Overview", filters:["all","s4"],
+    committee: "Dr. Moner AlSader",
+    q: "Why did you choose this project?",
+    options:[
+      {l:"A", t:"Our supervisor suggested it."},
+      {l:"B", t:"We were interested in NFC and AI technologies."},
+      {l:"C", t:"Food allergies are a real safety issue — misreading a label can cause a severe reaction. We wanted to make grocery shopping safer, especially for people who can't read small ingredient labels."},
+      {l:"D", t:"It combines multiple modern technologies in one project."}
+    ],
+    strongest:"C", moderate:"D", weak:"A",
+    reaction:{
+      A:"This gives all credit to the supervisor. Never say this.",
+      B:"Technology interest isn't a justification for a project. What problem does it solve?",
+      C:"Strong. You identified a real human problem and connected your project directly to it.",
+      D:"Technology combinations don't justify projects — problems do."
+    },
+    note:"The committee wants to see that you solved a real problem, not that you practiced technologies."
+  },
+  {
+    id:5, category:"App Overview", filters:["all","s1","s2","s3","s4","s5"],
+    committee: "Dr. Moner AlSader",
+    q: "Walk me through what happens when a user scans a product from start to finish.",
+    options:[
+      {l:"A", t:"User opens app, taps phone on product, sees information."},
+      {l:"B", t:"The user taps their phone on the NFC sticker on a product. The app reads the tag's unique ID, looks it up in the local database, shows nutrition info, flags any allergens that conflict with the user's profile, then sends the product to Groq AI which returns 3 safe alternatives — all read aloud automatically."},
+      {l:"C", t:"NFC scan → database lookup → show product details."},
+      {l:"D", t:"The user scans the tag, the app finds the product and shows info including AI recommendations."}
+    ],
+    strongest:"B", moderate:"D", weak:"C",
+    reaction:{
+      A:"Too simplified. You're not showing any understanding of how it actually works.",
+      B:"Excellent end-to-end flow. You covered NFC, database, allergen matching, AI, and TTS in sequence.",
+      C:"This is a diagram, not an explanation. The committee wants to hear you explain it.",
+      D:"Closer, but still missing the allergen matching step and the TTS readout."
+    },
+    note:"Walk through each step — the more concrete, the more confident you appear."
+  },
+
+  // ── NFC & SCANNING ──────────────────────────────────────────
+  {
+    id:6, category:"NFC & Scanning", filters:["all","s1"],
+    committee: "Dr. Moner AlSader",
+    q: "How does NFC scanning technically work in your app?",
+    options:[
+      {l:"A", t:"We use Android's NFC API to read the tag data."},
+      {l:"B", t:"Android's Foreground Dispatch sends the tag to our activity when the phone is tapped. We extract the tag's hardware UID — a unique ID burned into every chip — convert it to a hex string, and look it up in our database. If found, show the product. If not, play an error sound."},
+      {l:"C", t:"The phone creates a radio field that powers the NFC chip and reads its data."},
+      {l:"D", t:"We read NDEF records from the NFC tag to get product information."}
+    ],
+    strongest:"B", moderate:"A", weak:"D",
+    reaction:{
+      A:"You named the API but didn't explain how you actually used it.",
+      B:"Perfect. You covered Foreground Dispatch, UID extraction, database lookup, and error handling.",
+      C:"That's how NFC works physically — it doesn't explain your implementation.",
+      D:"This is incorrect. You don't use NDEF data, you use UID-based lookup."
+    },
+    note:"UID-based lookup is a key technical decision. Make sure every team member knows this."
+  },
+  {
+    id:7, category:"NFC & Scanning", filters:["all","s1"],
+    committee: "Dr. Moner AlSader",
+    q: "Why use the tag's UID instead of writing product data directly to the tag?",
+    options:[
+      {l:"A", t:"Reading is faster than writing."},
+      {l:"B", t:"It's more secure — UIDs can't be copied."},
+      {l:"C", t:"Every NFC chip already has a unique hardware ID burned in at the factory. We map that ID to a product in our database — no tag programming equipment needed. Any blank $0.10 sticker works."},
+      {l:"D", t:"Writing data to NFC tags requires special permissions."}
+    ],
+    strongest:"C", moderate:"A", weak:"D",
+    reaction:{
+      A:"True but incomplete — the real reason is deployment simplicity.",
+      B:"Security isn't the main reason — any store could re-register a UID. The real reason is practicality.",
+      C:"Exactly right. The deployment reason is the strongest justification.",
+      D:"Incorrect. Writing to NFC tags is possible with standard Android permissions."
+    },
+    note:"The UID decision saves cost and complexity in a real store deployment."
+  },
+  {
+    id:8, category:"NFC & Scanning", filters:["all","s1"],
+    committee: "Dr. Moner AlSader",
+    q: "Why NFC instead of barcodes or QR codes?",
+    options:[
+      {l:"A", t:"NFC is newer and more advanced technology."},
+      {l:"B", t:"NFC works by touch — no camera aiming needed, which is critical for visually impaired users. It works in any lighting, doesn't require camera permissions, and NFC chips don't wear out like barcodes that can tear or fade."},
+      {l:"C", t:"Barcodes are harder to implement."},
+      {l:"D", t:"QR codes require internet to work."}
+    ],
+    strongest:"B", moderate:"A", weak:"D",
+    reaction:{
+      A:"'Newer' is not a justification. Why is it better for your specific users?",
+      B:"Strong. You connected NFC advantages directly to your target user's needs.",
+      C:"Incorrect — barcodes are arguably simpler. This would hurt your credibility.",
+      D:"Incorrect. QR codes don't require internet."
+    },
+    note:"Always connect technical choices back to user needs, not just technology features."
+  },
+  {
+    id:9, category:"NFC & Scanning", filters:["all","s1"],
+    committee: "Dr. Moner AlSader",
+    q: "What happens if a user taps an NFC tag that's not in your database?",
+    options:[
+      {l:"A", t:"The app crashes and needs to be restarted."},
+      {l:"B", t:"Nothing happens."},
+      {l:"C", t:"An error sound plays, the phone vibrates longer than a success scan, and a message appears telling the user the product wasn't found — they stay on the home screen."},
+      {l:"D", t:"The app automatically searches the internet for the product."}
+    ],
+    strongest:"C", moderate:"D", weak:"B",
+    reaction:{
+      A:"If the app crashes on an unknown tag, it would fail constantly. This would be a critical bug.",
+      B:"No feedback at all is terrible UX. The user would have no idea what happened.",
+      C:"Excellent. You handle the error gracefully with audio, haptic, and visual feedback.",
+      D:"The app doesn't do this — don't say it does."
+    },
+    note:"Error handling shows the committee you thought about real-world use, not just the happy path."
+  },
+  {
+    id:10, category:"NFC & Scanning", filters:["all","s1"],
+    committee: "Dr. Moner AlSader",
+    q: "What if the user's phone doesn't have NFC hardware?",
+    options:[
+      {l:"A", t:"The app will still work but NFC features won't function."},
+      {l:"B", t:"The app is marked as requiring NFC in the Android manifest, so it won't appear in the Play Store on devices without NFC — users are protected from downloading something that won't work for them."},
+      {l:"C", t:"We show an error message when they try to scan."},
+      {l:"D", t:"We have a barcode fallback for non-NFC devices."}
+    ],
+    strongest:"B", moderate:"C", weak:"D",
+    reaction:{
+      A:"This is misleading. If the app can't scan, it can't do its core function.",
+      B:"Perfect. The manifest declaration prevents the app from reaching users who can't use it.",
+      C:"Better than doing nothing, but the problem is already solved at the Play Store level.",
+      D:"The app doesn't have a barcode fallback — don't say it does."
+    },
+    note:"The `<uses-feature android:required='true'>` declaration is a simple but important detail."
+  },
+
+  // ── AI RECOMMENDATIONS ──────────────────────────────────────
+  {
+    id:11, category:"AI & Recommendations", filters:["all","s2"],
+    committee: "Dr. Moner AlSader",
+    q: "How do the AI recommendations work?",
+    options:[
+      {l:"A", t:"We call an AI API and it returns product suggestions."},
+      {l:"B", t:"We send the scanned product's info and the user's full allergy profile to Groq. The AI uses a BANNED ingredient list we build from the user's restrictions, cross-checks hidden allergens, then verifies each suggestion before returning 3 safe alternatives with names, reasons, and nutrition data."},
+      {l:"C", t:"The AI looks up similar products in a database."},
+      {l:"D", t:"We use machine learning trained on our 15 products."}
+    ],
+    strongest:"B", moderate:"A", weak:"D",
+    reaction:{
+      A:"You described calling an API, not how the system actually works.",
+      B:"Excellent. You covered the input, the safety mechanism, the verification step, and the output.",
+      C:"Incorrect. The AI doesn't look up a database — it generates suggestions from its training.",
+      D:"Incorrect. We use a pre-trained model via API, not custom-trained ML."
+    },
+    note:"The BANNED list and VERIFY step are what separate your system from a simple API call."
+  },
+  {
+    id:12, category:"AI & Recommendations", filters:["all","s2"],
+    committee: "Dr. Moner AlSader",
+    q: "How do you ensure the AI doesn't suggest something dangerous — like almond milk for a nut allergy?",
+    options:[
+      {l:"A", t:"We trust the AI to be accurate based on its training."},
+      {l:"B", t:"We review the results before showing them."},
+      {l:"C", t:"Multiple layers: a system message positioning the AI as a food safety assistant, a BANNED ingredient list from the user's profile, hidden allergen knowledge (whey = dairy, soy lecithin = soy), a VERIFY step making the AI double-check, and app-side sanitization."},
+      {l:"D", t:"We filter out products containing the user's allergens from the results."}
+    ],
+    strongest:"C", moderate:"D", weak:"A",
+    reaction:{
+      A:"This is dangerous. AI models make mistakes — trusting them blindly for safety-critical applications is unacceptable.",
+      B:"Manual review doesn't scale and isn't what the app does.",
+      C:"Excellent. You demonstrated a defense-in-depth approach. This is exactly what the committee wants to hear.",
+      D:"That's one layer — but what if allergens are disguised under different names, like 'casein' instead of 'dairy'?"
+    },
+    note:"This is the most important safety question. All 5 students should know this answer."
+  },
+  {
+    id:13, category:"AI & Recommendations", filters:["all","s2"],
+    committee: "Dr. Moner AlSader",
+    q: "Why did you choose Groq over OpenAI or Google Gemini?",
+    options:[
+      {l:"A", t:"Groq has the best AI model available."},
+      {l:"B", t:"Groq is completely free with no credit card required, responds in under 2 seconds, handles Arabic well, and uses an OpenAI-compatible API so we can easily switch providers. We tried Gemini first but hit daily quota limits during development."},
+      {l:"C", t:"We couldn't afford OpenAI."},
+      {l:"D", t:"Our supervisor recommended Groq."}
+    ],
+    strongest:"B", moderate:"C", weak:"D",
+    reaction:{
+      A:"Incorrect. Groq runs open-source models — GPT-4 or Gemini Ultra would arguably be higher quality.",
+      B:"Perfect. Free cost, speed, Arabic support, and portability — all valid technical reasons plus real experience.",
+      C:"Honest but weak. Add the technical reasons — it sounds better than just 'we were poor'.",
+      D:"Never attribute decisions to others. Own your choices."
+    },
+    note:"Practical constraints are valid reasons — just pair them with technical justifications."
+  },
+  {
+    id:14, category:"AI & Recommendations", filters:["all","s2"],
+    committee: "Dr. Moner AlSader",
+    q: "What is the BANNED list in your AI prompt and how does it work?",
+    options:[
+      {l:"A", t:"A list of products users previously rejected."},
+      {l:"B", t:"A hardcoded blacklist of unsafe ingredients."},
+      {l:"C", t:"A dynamically generated list of dangerous ingredient keywords built from the user's active dietary restrictions — for example, a nut allergy generates: almond, cashew, hazelnut, peanut butter, tree nuts, etc. This list is injected into every AI prompt."},
+      {l:"D", t:"A list of products not available in Saudi Arabia."}
+    ],
+    strongest:"C", moderate:"B", weak:"A",
+    reaction:{
+      A:"Incorrect. The BANNED list is about ingredients, not user preferences.",
+      B:"Partially right but 'hardcoded' is wrong — it's dynamically generated per user profile.",
+      C:"Excellent. Dynamic generation is the key detail — it adapts to each user's specific restrictions.",
+      D:"Completely incorrect."
+    },
+    note:"Dynamic generation per profile is what makes it personal and safe."
+  },
+  {
+    id:15, category:"AI & Recommendations", filters:["all","s2"],
+    committee: "Dr. Moner AlSader",
+    q: "What happens to AI recommendations when there's no internet?",
+    options:[
+      {l:"A", t:"The app shows an error and the feature is unavailable."},
+      {l:"B", t:"We have hardcoded backup recommendations for each product."},
+      {l:"C", t:"After a successful Groq response, results are cached in local storage keyed by product name. Scanning the same product offline serves the cached result immediately. If never cached, a message appears with a retry button."},
+      {l:"D", t:"The app uses a simpler local algorithm to generate alternatives."}
+    ],
+    strongest:"C", moderate:"A", weak:"B",
+    reaction:{
+      A:"At least it's honest, but you should mention the caching system.",
+      B:"Incorrect. Hardcoded fallbacks were removed — they were too generic and didn't respect user profiles.",
+      C:"Perfect. Cache-first approach, graceful degradation, and honest about the no-cache scenario.",
+      D:"Incorrect. There's no local algorithm."
+    },
+    note:"Removing hardcoded fallbacks was the right call — generic suggestions could still be unsafe."
+  },
+  {
+    id:16, category:"AI & Recommendations", filters:["all","s2"],
+    committee: "Dr. Moner AlSader",
+    q: "What if the AI returns a response with garbled text or strange characters?",
+    options:[
+      {l:"A", t:"We show whatever the AI returns."},
+      {l:"B", t:"We retry the request automatically."},
+      {l:"C", t:"Two validation checks: sanitize() strips any characters that aren't Arabic, English, or standard punctuation. hasGibberish() detects CJK characters that sometimes appear when the model mixes up Arabic. Any recommendation failing either check is silently dropped."},
+      {l:"D", t:"We log the error and display a generic message."}
+    ],
+    strongest:"C", moderate:"D", weak:"A",
+    reaction:{
+      A:"Showing garbled text to users would be a poor experience and could cause confusion.",
+      B:"Retrying doesn't solve systematic issues and adds latency.",
+      C:"Excellent. You have concrete, named methods with specific logic — that shows real implementation.",
+      D:"Logging is good practice but the user experience isn't handled."
+    },
+    note:"CJK character detection is a specific detail that shows you actually tested and debugged the AI."
+  },
+  {
+    id:17, category:"AI & Recommendations", filters:["all","s2"],
+    committee: "Dr. Moner AlSader",
+    q: "Can users rely on AI recommendations 100% for their safety?",
+    options:[
+      {l:"A", t:"Yes, we have multiple safety layers."},
+      {l:"B", t:"No, AI can make mistakes."},
+      {l:"C", t:"Not 100% — the safety layers significantly reduce risk, but the app is a tool to assist safer decisions, not replace careful label reading. We're transparent about this limitation and always recommend users verify for critical allergies."},
+      {l:"D", t:"Yes, the BANNED list and VERIFY step guarantee safety."}
+    ],
+    strongest:"C", moderate:"B", weak:"D",
+    reaction:{
+      A:"Overconfidence in AI safety is dangerous. No system is 100% reliable.",
+      B:"Honest but needs more — what do you actually guarantee, and what are the limits?",
+      C:"Excellent. Honest, responsible, and shows mature thinking about AI limitations.",
+      D:"Nothing in software 'guarantees' safety. This claim would concern the committee."
+    },
+    note:"Admitting limitations honestly earns more trust than overclaiming."
+  },
+
+  // ── DATABASE & OFFLINE ──────────────────────────────────────
+  {
+    id:18, category:"Database & Offline", filters:["all","s1"],
+    committee: "Dr. Moner AlSader",
+    q: "Why did you use a local database instead of a cloud database like Firebase?",
+    options:[
+      {l:"A", t:"Firebase is more expensive and complex to set up."},
+      {l:"B", t:"For 15 pre-seeded products, a local database is instant, works offline, and needs no internet for basic functionality. Firebase would add a network dependency and server maintenance for something that doesn't need it."},
+      {l:"C", t:"We didn't have time to set up a server."},
+      {l:"D", t:"Local databases are more secure."}
+    ],
+    strongest:"B", moderate:"A", weak:"C",
+    reaction:{
+      A:"True, but lead with the technical reason — simplicity and offline capability.",
+      B:"Perfect. Right tool for the right job — local storage for small, static, offline-needed data.",
+      C:"Honest but weak. Don't cite time constraints — cite the technical justification.",
+      D:"Not necessarily true — cloud databases can be more secure with proper configuration."
+    },
+    note:"'Right tool for the job' is always a strong justification."
+  },
+  {
+    id:19, category:"Database & Offline", filters:["all","s1","s4"],
+    committee: "Dr. Moner AlSader",
+    q: "What happens when the user has no internet connection?",
+    options:[
+      {l:"A", t:"The app stops working."},
+      {l:"B", t:"Only NFC scanning works offline."},
+      {l:"C", t:"Three things still work: all 15 products are stored locally so NFC scanning works, AI recommendations from previous scans are cached so you still get results you've seen before, and TTS falls back to the phone's built-in voice engine."},
+      {l:"D", t:"We show an offline banner and disable AI features."}
+    ],
+    strongest:"C", moderate:"D", weak:"A",
+    reaction:{
+      A:"This would make the app useless in areas with poor connectivity.",
+      B:"Partially true but incomplete — the cache means AI recommendations can work offline too.",
+      C:"Excellent breakdown of exactly what works and why.",
+      D:"You're not just disabling — you're gracefully degrading with cached data."
+    },
+    note:"Offline-first thinking is a mark of a mature developer."
+  },
+  {
+    id:20, category:"Database & Offline", filters:["all","s1"],
+    committee: "Dr. Moner AlSader",
+    q: "How are products added to the database? Can stores add their own?",
+    options:[
+      {l:"A", t:"The database is pre-seeded with 15 products — stores can't add their own currently."},
+      {l:"B", t:"Stores can log into an admin panel to add products."},
+      {l:"C", t:"Currently 15 products are pre-seeded for the prototype. In production, we'd add a backend with a store management portal where staff could register new NFC tag UIDs and product data. That's documented as a future enhancement."},
+      {l:"D", t:"Users can add products by scanning and entering data manually."}
+    ],
+    strongest:"C", moderate:"A", weak:"B",
+    reaction:{
+      A:"Honest but leaves the committee wondering if you thought about the future.",
+      B:"The app doesn't have this — don't say it does.",
+      C:"Perfect. Honest about the prototype's limits while showing you understand what a real deployment needs.",
+      D:"This feature doesn't exist in the current version."
+    },
+    note:"Always acknowledge prototype limitations and connect them to a future vision."
+  },
+  {
+    id:21, category:"Database & Offline", filters:["all","s1"],
+    committee: "Dr. Moner AlSader",
+    q: "What database technology did you use and why?",
+    options:[
+      {l:"A", t:"SQLite because it's simple and built into Android."},
+      {l:"B", t:"Room Persistence Library, which wraps SQLite with an ORM layer — it gives us compile-time SQL verification, LiveData integration for automatic UI updates, and type-safe queries without raw SQL strings."},
+      {l:"C", t:"We used SharedPreferences for all data storage."},
+      {l:"D", t:"Firebase Realtime Database."}
+    ],
+    strongest:"B", moderate:"A", weak:"C",
+    reaction:{
+      A:"Correct but incomplete — Room adds significant benefits over raw SQLite.",
+      B:"Excellent. You named specific technical advantages: compile-time checking, LiveData, type safety.",
+      C:"SharedPreferences is only used for settings and cache — not product data.",
+      D:"Incorrect. Firebase wasn't used."
+    },
+    note:"Knowing why you chose a specific library matters more than just naming it."
+  },
+
+  // ── TTS & ARABIC ──────────────────────────────────────────
+  {
+    id:22, category:"TTS & Arabic", filters:["all","s5"],
+    committee: "Dr. Moner AlSader",
+    q: "How does text-to-speech work in your app?",
+    options:[
+      {l:"A", t:"We use Android's built-in TTS engine."},
+      {l:"B", t:"Primary is Microsoft Edge TTS — a neural voice service via WebSocket that sounds natural in both Arabic and English. If there's no internet, it automatically falls back to Android's built-in TTS. We use a generation counter to cancel old audio when the user navigates quickly."},
+      {l:"C", t:"We send text to a TTS API and play the audio back."},
+      {l:"D", t:"We use Google Cloud TTS for high-quality voice output."}
+    ],
+    strongest:"B", moderate:"C", weak:"A",
+    reaction:{
+      A:"Android's TTS is the fallback, not the primary. This answer misses the key design.",
+      B:"Excellent. Primary system, fallback, and the generation counter — all three show real implementation depth.",
+      C:"Technically true but vague. What API? What happens when it fails?",
+      D:"Incorrect. Google Cloud TTS wasn't used — it's paid."
+    },
+    note:"The generation counter is a specific detail that proves you coded and tested this yourself."
+  },
+  {
+    id:23, category:"TTS & Arabic", filters:["all","s5"],
+    committee: "Dr. Moner AlSader",
+    q: "What is tashkeel and why does it matter for your app?",
+    options:[
+      {l:"A", t:"It's the RTL direction setting for Arabic text."},
+      {l:"B", t:"It's how Arabic fonts are styled in the UI."},
+      {l:"C", t:"Tashkeel are Arabic diacritical marks that show vowels. Without them, TTS systems mispronounce words. We store text with tashkeel in the database for accurate speech, but strip them before displaying in the UI so the text looks clean."},
+      {l:"D", t:"It's a type of Arabic font encoding."}
+    ],
+    strongest:"C", moderate:"A", weak:"B",
+    reaction:{
+      A:"That's RTL/BiDi — a different concept entirely.",
+      B:"Incorrect. Tashkeel is about pronunciation marks, not font styling.",
+      C:"Perfect. You explained what it is, why it matters for TTS, and the storage strategy.",
+      D:"Incorrect."
+    },
+    note:"Tashkeel shows cultural and technical awareness — a strong differentiator for your project."
+  },
+  {
+    id:24, category:"TTS & Arabic", filters:["all","s5"],
+    committee: "Dr. Moner AlSader",
+    q: "Why Microsoft Edge TTS over Google Cloud TTS or Amazon Polly?",
+    options:[
+      {l:"A", t:"Microsoft is more reliable."},
+      {l:"B", t:"Edge TTS gives neural-quality voices completely free — it's the same engine used in the Microsoft Edge browser. Google Cloud TTS and Amazon Polly both require payment. Android's built-in engine is free but sounds robotic, especially in Arabic."},
+      {l:"C", t:"It was easier to integrate."},
+      {l:"D", t:"It has the most language support."}
+    ],
+    strongest:"B", moderate:"C", weak:"A",
+    reaction:{
+      A:"Vague. All three services are reliable cloud platforms.",
+      B:"Excellent. Neural quality + free + Arabic support. Three concrete reasons.",
+      C:"'Easier' alone isn't a justification. Pair it with why it was the right choice.",
+      D:"All three services support Arabic — language support isn't the differentiator here."
+    },
+    note:"Cost + quality for free is a very strong justification in a student project context."
+  },
+  {
+    id:25, category:"TTS & Arabic", filters:["all","s5"],
+    committee: "Dr. Moner AlSader",
+    q: "What happens if Edge TTS doesn't respond in time?",
+    options:[
+      {l:"A", t:"The user waits until it connects."},
+      {l:"B", t:"We show an error message."},
+      {l:"C", t:"After 5 seconds with no response, the system automatically switches to Android's built-in TTS — lower quality but works immediately without internet. The user experience continues without interruption."},
+      {l:"D", t:"The app retries the Edge TTS request up to 3 times."}
+    ],
+    strongest:"C", moderate:"D", weak:"A",
+    reaction:{
+      A:"Making the user wait indefinitely is poor UX — especially for accessibility-focused features.",
+      B:"Showing an error for a non-critical feature without a fallback is unnecessary.",
+      C:"Excellent. Clear timeout, automatic fallback, graceful degradation.",
+      D:"Retrying increases latency — for TTS, it's better to fall back fast."
+    },
+    note:"5-second timeout with automatic fallback shows you thought about real-world network conditions."
+  },
+  {
+    id:26, category:"TTS & Arabic", filters:["all","s5"],
+    committee: "Dr. Moner AlSader",
+    q: "How does the app handle right-to-left Arabic layout?",
+    options:[
+      {l:"A", t:"We create separate layout XML files for Arabic."},
+      {l:"B", t:"We manually flip all UI elements when Arabic is selected."},
+      {l:"C", t:"Android handles RTL automatically when language is set to Arabic — we use start/end instead of left/right in our layouts, and add RTL mark characters for mixed Arabic-English text to ensure correct display direction."},
+      {l:"D", t:"Arabic text is always displayed left-to-right in our app."}
+    ],
+    strongest:"C", moderate:"A", weak:"D",
+    reaction:{
+      A:"Duplicate layout files would be a maintenance nightmare and isn't best practice.",
+      B:"Manual flipping is error-prone and fragile.",
+      C:"Excellent. Using start/end over left/right is the correct Android RTL approach.",
+      D:"Incorrect and would make the Arabic version unusable."
+    },
+    note:"start/end instead of left/right is the specific implementation detail that shows you did this correctly."
+  },
+
+  // ── UI & ACCESSIBILITY ─────────────────────────────────────
+  {
+    id:27, category:"UI & Accessibility", filters:["all","s3"],
+    committee: "Dr. Moner AlSader",
+    q: "Why did you build a custom tutorial instead of using a library like TapTargetView?",
+    options:[
+      {l:"A", t:"We couldn't find a library that worked well enough."},
+      {l:"B", t:"Libraries add dependencies and we wanted to keep the project lean."},
+      {l:"C", t:"Building from scratch demonstrates real technical skill, gives full control over spotlight shape, touch blocking, and auto-scroll — features off-the-shelf libraries didn't support the way we needed. Zero added dependencies."},
+      {l:"D", t:"Custom is always better than using libraries."}
+    ],
+    strongest:"C", moderate:"B", weak:"D",
+    reaction:{
+      A:"Vague. There are good libraries — you chose not to use them for specific reasons.",
+      B:"Dependency reduction is a valid reason but not complete without the capability argument.",
+      C:"Excellent. You named specific missing features and connected it to senior project evaluation criteria.",
+      D:"This is wrong — libraries save time and are often the right choice."
+    },
+    note:"For a senior project, 'demonstrates skill' is a genuine justification the committee respects."
+  },
+  {
+    id:28, category:"UI & Accessibility", filters:["all","s3","s4"],
+    committee: "Dr. Moner AlSader",
+    q: "What accessibility features does the app have?",
+    options:[
+      {l:"A", t:"Large text and dark mode support."},
+      {l:"B", t:"Auto text-to-speech that reads all product info aloud, adjustable font size (S/M/L), adjustable TTS speed, touch-based NFC scanning without camera, and dual sensory feedback (sound + vibration) on scans."},
+      {l:"C", t:"It supports screen readers."},
+      {l:"D", t:"We have a high contrast mode."}
+    ],
+    strongest:"B", moderate:"A", weak:"C",
+    reaction:{
+      A:"These are basic features — the app goes much further.",
+      B:"Excellent. Five distinct accessibility features with a clear connection to the target user.",
+      C:"Screen reader support isn't a specific feature you implemented.",
+      D:"High contrast mode isn't a specific implemented feature."
+    },
+    note:"Accessibility is a core selling point of the project — all team members should know this list."
+  },
+  {
+    id:29, category:"UI & Accessibility", filters:["all","s3"],
+    committee: "Dr. Moner AlSader",
+    q: "How does the spotlight tutorial actually work technically?",
+    options:[
+      {l:"A", t:"We show popups one after another."},
+      {l:"B", t:"We use a third-party animation library."},
+      {l:"C", t:"A custom View draws on top of the entire screen, creating a cutout (circle or rectangle) to highlight one element at a time. It intercepts all touch events so users can't navigate away, and auto-scrolls to elements that are off-screen."},
+      {l:"D", t:"We overlay transparent views on each target element."}
+    ],
+    strongest:"C", moderate:"A", weak:"B",
+    reaction:{
+      A:"Popups and spotlights are different. This shows you might not fully understand your own code.",
+      B:"Incorrect — you built it from scratch.",
+      C:"Excellent. Canvas drawing, touch interception, and auto-scroll — three implementation details.",
+      D:"Overlaying individual views wouldn't block the rest of the UI."
+    },
+    note:"If you built it, know how it works — the committee may ask to see the code."
+  },
+  {
+    id:30, category:"UI & Accessibility", filters:["all","s3","s4"],
+    committee: "Dr. Moner AlSader",
+    q: "How does the font size setting work across the whole app?",
+    options:[
+      {l:"A", t:"Android's system font size setting controls it."},
+      {l:"B", t:"We have three separate layout files for each font size."},
+      {l:"C", t:"Three built-in sizes (Small, Medium, Large) are stored in PreferencesManager. A font scale multiplier is applied app-wide — all text sizes defined in SP scale proportionally when the user changes the setting."},
+      {l:"D", t:"Each screen reads the setting and adjusts its own text size."}
+    ],
+    strongest:"C", moderate:"D", weak:"B",
+    reaction:{
+      A:"We don't rely on system font size — we have our own control for better consistency.",
+      B:"Separate layout files for font sizes would be a maintenance nightmare.",
+      C:"Excellent. Centralized through PreferencesManager with a scale multiplier — clean architecture.",
+      D:"Partially correct but decentralized — a global scale applied once is cleaner."
+    },
+    note:"Centralized preference management shows you thought about maintainability."
+  },
+
+  // ── SECURITY & PRIVACY ──────────────────────────────────────
+  {
+    id:31, category:"Security & Privacy", filters:["all","s4"],
+    committee: "Dr. Moner AlSader",
+    q: "Where is user data stored? Does any of it leave the device?",
+    options:[
+      {l:"A", t:"Everything is stored locally — no data leaves the device."},
+      {l:"B", t:"Data is stored in our cloud for backup purposes."},
+      {l:"C", t:"All personal data stays on the device in SharedPreferences and Room. The only external calls are product name + allergen info sent to Groq for recommendations, and text sent to Edge TTS for voice. The user's identity is never transmitted."},
+      {l:"D", t:"We encrypt all data before storing it locally."}
+    ],
+    strongest:"C", moderate:"A", weak:"D",
+    reaction:{
+      A:"Almost — but some data does leave (product info to Groq, text to TTS). Say that clearly.",
+      B:"Incorrect and concerning. The committee would flag this as a privacy issue.",
+      C:"Excellent and precise. You acknowledge what does and doesn't leave the device.",
+      D:"Encryption isn't implemented in the prototype — don't claim it."
+    },
+    note:"Being precise about what data leaves the device is more trustworthy than just saying 'nothing leaves'."
+  },
+  {
+    id:32, category:"Security & Privacy", filters:["all","s2","s4"],
+    committee: "Dr. Moner AlSader",
+    q: "Is the Groq API key secure in your app?",
+    options:[
+      {l:"A", t:"Yes, we encrypt it in the app."},
+      {l:"B", t:"For this prototype it's embedded in the app code — not ideal for production. In a real deployment we'd move it to a backend server so the app never holds the key directly."},
+      {l:"C", t:"API keys are always secure because they require authentication."},
+      {l:"D", t:"We use environment variables to keep it secure."}
+    ],
+    strongest:"B", moderate:"D", weak:"A",
+    reaction:{
+      A:"If you didn't implement encryption, don't claim it. This would embarrass you if the committee checked.",
+      B:"Honest and shows production awareness. This is the right answer.",
+      C:"Incorrect. Keys embedded in app binaries can be extracted by reverse engineering.",
+      D:"Android apps don't use environment variables the same way servers do."
+    },
+    note:"Honest about prototype limitations + knowing the production solution = strong answer."
+  },
+  {
+    id:33, category:"Security & Privacy", filters:["all","s4"],
+    committee: "Dr. Moner AlSader",
+    q: "What are the security risks in your app and how would you address them in production?",
+    options:[
+      {l:"A", t:"The app is secure — all data is local."},
+      {l:"B", t:"The main risk is the API key in the code. In production: move the key to a backend, add rate limiting, and use HTTPS for all API calls — which we already do since Groq and Edge TTS both use HTTPS/WSS."},
+      {l:"C", t:"We need to add a login system."},
+      {l:"D", t:"We would add database encryption."}
+    ],
+    strongest:"B", moderate:"D", weak:"A",
+    reaction:{
+      A:"No software is fully secure — claiming this would raise red flags.",
+      B:"Excellent. Identified the real risk, gave a concrete solution, and showed you already handle part of it (HTTPS).",
+      C:"A login system addresses different risks — authentication vs. key security.",
+      D:"Database encryption is worth mentioning but doesn't address the main API key risk."
+    },
+    note:"Naming real risks and their solutions shows technical maturity."
+  },
+
+  // ── FUTURE & SCALABILITY ────────────────────────────────────
+  {
+    id:34, category:"Future & Scalability", filters:["all","s1","s2","s3","s4","s5"],
+    committee: "Dr. Moner AlSader",
+    q: "Can this app scale to a real supermarket with thousands of products?",
+    options:[
+      {l:"A", t:"Yes, you just add more products."},
+      {l:"B", t:"Not immediately — but the architecture supports it. We'd need a backend sync system for products, a store staff portal to register NFC UIDs, and real-time data from suppliers. The prototype proves the concept and interaction model work."},
+      {l:"C", t:"We'd need to completely rebuild the app."},
+      {l:"D", t:"It already handles any number of products."}
+    ],
+    strongest:"B", moderate:"A", weak:"C",
+    reaction:{
+      A:"Technically possible but you're ignoring the operational challenges.",
+      B:"Excellent. Honest about what needs to change + shows you understand what real deployment requires.",
+      C:"The core app wouldn't need a rebuild — just the data infrastructure.",
+      D:"Incorrect. The current local database approach doesn't scale to thousands of dynamic products."
+    },
+    note:"Showing you understand the gap between prototype and production earns respect."
+  },
+  {
+    id:35, category:"Future & Scalability", filters:["all","s1","s2","s3","s4","s5"],
+    committee: "Dr. Moner AlSader",
+    q: "What would you improve if you had more time?",
+    options:[
+      {l:"A", t:"Make the UI look better and add more animations."},
+      {l:"B", t:"Add more products to the database."},
+      {l:"C", t:"Add barcode scanning as a fallback for stores without NFC, integrate Open Food Facts for verified real nutrition data, implement multi-user family profiles with separate allergy settings, and move the API key to a backend server."},
+      {l:"D", t:"Improve the AI to be more accurate."}
+    ],
+    strongest:"C", moderate:"D", weak:"A",
+    reaction:{
+      A:"UI polish is the least impactful improvement — the committee wants to see systems thinking.",
+      B:"More data is fine but not a strategic improvement.",
+      C:"Excellent. Four concrete, prioritized improvements that address real limitations.",
+      D:"Vague — how would you improve it? This answer shows you haven't thought it through."
+    },
+    note:"Future improvements show you understand your own limitations honestly."
+  },
+  {
+    id:36, category:"Future & Scalability", filters:["all","s2"],
+    committee: "Dr. Moner AlSader",
+    q: "You mentioned Open Food Facts — why didn't you use it in the final app?",
+    options:[
+      {l:"A", t:"We didn't know about it until late in development."},
+      {l:"B", t:"We evaluated it — Saudi Arabia coverage was incomplete, plant-based alternatives had zero entries, allergen tags were inconsistent, and the API rate-limits at 10 requests per minute with frequent downtime. We kept Groq-only for reliability and documented OFF as a future enhancement."},
+      {l:"C", t:"The API was too complicated to integrate."},
+      {l:"D", t:"Open Food Facts doesn't support Arabic."}
+    ],
+    strongest:"B", moderate:"A", weak:"C",
+    reaction:{
+      A:"Implies poor planning. Better to say you evaluated it and made a deliberate decision.",
+      B:"Excellent. You show you actually tested it, found specific problems, and made a reasoned decision.",
+      C:"Vague and makes the team look technically weak.",
+      D:"Incorrect."
+    },
+    note:"'We evaluated and rejected it' is far stronger than 'we didn't use it'."
+  },
+  {
+    id:37, category:"Future & Scalability", filters:["all","s1","s2","s3","s4","s5"],
+    committee: "Dr. Moner AlSader",
+    q: "What was the biggest technical challenge you faced and how did you solve it?",
+    options:[
+      {l:"A", t:"Setting up the project structure was challenging."},
+      {l:"B", t:"Integrating multiple APIs at once."},
+      {l:"C", t:"The AI recommending dangerous products — Groq suggested almond milk for a nut-allergy user. We solved it with a multi-layer safety pipeline: BANNED list, hidden allergen knowledge, VERIFY step, and app-side sanitization."},
+      {l:"D", t:"Getting NFC to work reliably on different devices."}
+    ],
+    strongest:"C", moderate:"D", weak:"A",
+    reaction:{
+      A:"Project structure is not a challenge — it's a baseline task.",
+      B:"Too vague. Which APIs? What was hard about it?",
+      C:"Excellent. Specific problem, specific solution, shows safety-first thinking.",
+      D:"Valid if you elaborate — but the AI safety issue is the more impactful story."
+    },
+    note:"Real challenges with real solutions tell a much better story than vague struggles."
+  },
+  {
+    id:38, category:"Future & Scalability", filters:["all","s1","s2","s3","s4","s5"],
+    committee: "Dr. Moner AlSader",
+    q: "Why Android and not iOS or a web app?",
+    options:[
+      {l:"A", t:"We know Android development better."},
+      {l:"B", t:"It was a course requirement."},
+      {l:"C", t:"Android's NFC API is mature and allows full Foreground Dispatch control. iOS restricts NFC access heavily — Apple only allows reading NDEF tags in specific scenarios. Android also has dominant market share in Saudi Arabia."},
+      {l:"D", t:"Android is more popular globally."}
+    ],
+    strongest:"C", moderate:"A", weak:"B",
+    reaction:{
+      A:"Fair but weak — pair it with the technical and market reasons.",
+      B:"Never say this. Even if true, it looks like you had no agency in the decision.",
+      C:"Excellent. iOS NFC restrictions + Android market dominance in Saudi = strong technical + business case.",
+      D:"Global popularity isn't the relevant metric — regional adoption is."
+    },
+    note:"iOS NFC restrictions are a real technical reason — knowing this shows platform-level awareness."
+  },
+
+  // ── QUICK FIRE ─────────────────────────────────────────────
+  {
+    id:39, category:"Architecture", filters:["all","s3","s4"],
+    committee: "Dr. Moner AlSader",
+    q: "What happens to data on screen rotation — does the user lose their scan results?",
+    options:[
+      {l:"A", t:"Yes, the screen reloads and data is lost."},
+      {l:"B", t:"We save state manually using onSaveInstanceState."},
+      {l:"C", t:"No — ViewModels survive configuration changes like rotation. The Fragment re-attaches to the same ViewModel and the LiveData automatically re-delivers the last value. The user sees no interruption."},
+      {l:"D", t:"We disable screen rotation to avoid the problem."}
+    ],
+    strongest:"C", moderate:"B", weak:"D",
+    reaction:{
+      A:"Data loss on rotation is a well-known Android bug that you'd be expected to handle.",
+      B:"onSaveInstanceState works but it's the older, manual approach — ViewModel is the modern solution.",
+      C:"Excellent. This is exactly why MVVM with LiveData was chosen.",
+      D:"Disabling rotation is poor UX — never do this just to avoid a bug."
+    },
+    note:"This question often trips up students who didn't build the app themselves."
+  },
+  {
+    id:40, category:"Architecture", filters:["all","s1","s2","s3","s4","s5"],
+    committee: "Dr. Moner AlSader",
+    q: "What did you personally learn from building this project?",
+    options:[
+      {l:"A", t:"I learned Android development."},
+      {l:"B", t:"I learned how to work with APIs."},
+      {l:"C", t:"That AI needs careful prompt engineering to be safe for real users, that good UX means thinking about every failure case — offline, wrong input, slow network — and that every technical decision has a tradeoff worth understanding before you make it."},
+      {l:"D", t:"I learned how to work as a team."}
+    ],
+    strongest:"C", moderate:"D", weak:"A",
+    reaction:{
+      A:"Too generic — any Android project teaches Android.",
+      B:"Also too generic.",
+      C:"Excellent. Three specific, project-grounded lessons that show genuine reflection.",
+      D:"Teamwork is fine but soft skills aren't what a technical committee is looking for here."
+    },
+    note:"The closing question is your chance to make a lasting impression — make it specific."
+  }
+];
+
+const CATEGORY_COLORS = {
+  "App Overview": "#00897b",
+  "NFC & Scanning": "#1565c0",
+  "AI & Recommendations": "#6a1b9a",
+  "Database & Offline": "#e65100",
+  "TTS & Arabic": "#2e7d32",
+  "UI & Accessibility": "#ad1457",
+  "Security & Privacy": "#b71c1c",
+  "Future & Scalability": "#4e342e",
+  "Architecture": "#37474f"
+};
+
+let currentFilter = "all";
+let filteredQuestions = [];
+let currentIndex = 0;
+let answers = [];
+
+function selectFilter(el, filter) {
+  document.querySelectorAll('.student-card').forEach(c => c.classList.remove('selected'));
+  el.classList.add('selected');
+  currentFilter = filter;
+}
+
+function startQuiz() {
+  filteredQuestions = currentFilter === "all"
+    ? [...QUESTIONS]
+    : QUESTIONS.filter(q => q.filters.includes(currentFilter));
+
+  // shuffle
+  for (let i = filteredQuestions.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [filteredQuestions[i], filteredQuestions[j]] = [filteredQuestions[j], filteredQuestions[i]];
+  }
+
+  currentIndex = 0;
+  answers = [];
+  showScreen('quiz-screen');
+  renderQuestion();
+}
+
+function showScreen(id) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+}
+
+function renderQuestion() {
+  const q = filteredQuestions[currentIndex];
+  const total = filteredQuestions.length;
+
+  document.getElementById('progress-fill').style.width = ((currentIndex / total) * 100) + '%';
+  document.getElementById('header-info').textContent = `${currentIndex + 1} / ${total}`;
+  document.getElementById('committee-name').textContent = q.committee + ' — Supervisor & Evaluator';
+  document.getElementById('q-category').textContent = q.category;
+  document.getElementById('q-category').style.color = CATEGORY_COLORS[q.category] || '#4db6ac';
+  document.getElementById('q-counter').textContent = `Question ${currentIndex + 1} of ${total}`;
+  document.getElementById('question-text').textContent = q.q;
+
+  const optionsEl = document.getElementById('options');
+  optionsEl.innerHTML = '';
+  q.options.forEach(opt => {
+    const div = document.createElement('div');
+    div.className = 'option';
+    div.innerHTML = `<div class="opt-letter">${opt.l}</div><div class="opt-text">${opt.t}</div>`;
+    div.onclick = () => selectAnswer(opt.l);
+    optionsEl.appendChild(div);
+  });
+
+  document.getElementById('feedback').classList.remove('show');
+  document.getElementById('next-btn').classList.remove('show');
+}
+
+function selectAnswer(letter) {
+  const q = filteredQuestions[currentIndex];
+  const opts = document.querySelectorAll('.option');
+
+  opts.forEach((el, i) => {
+    el.classList.add('locked');
+    el.onclick = null;
+    const l = q.options[i].l;
+    if (l === q.strongest) el.classList.add('strongest');
+    else if (l === q.moderate) el.classList.add('moderate');
+    else if (l !== letter) el.classList.add('weak');
+    if (l === letter) el.classList.add('selected');
+  });
+
+  answers.push({ q, chosen: letter });
+
+  // feedback
+  const fb = document.getElementById('feedback');
+  const badge = document.getElementById('feedback-badge');
+  const reaction = document.getElementById('committee-reaction');
+  const note = document.getElementById('best-answer-note');
+  const title = document.getElementById('feedback-title');
+
+  const isStrongest = letter === q.strongest;
+  const isModerate = letter === q.moderate;
+
+  if (isStrongest) {
+    badge.textContent = 'Excellent';
+    badge.className = 'feedback-badge badge-excellent';
+    title.textContent = 'This is the strongest answer';
+  } else if (isModerate) {
+    badge.textContent = 'Acceptable';
+    badge.className = 'feedback-badge badge-good';
+    title.textContent = 'This answer would pass but lacks depth';
+  } else {
+    badge.textContent = 'Needs Work';
+    badge.className = 'feedback-badge badge-weak';
+    title.textContent = 'This answer would concern the committee';
+  }
+
+  reaction.textContent = q.reaction[letter];
+  note.innerHTML = `<strong>Strongest answer (${q.strongest}):</strong> ${q.options.find(o => o.l === q.strongest).t} — ${q.note}`;
+
+  fb.classList.add('show');
+  document.getElementById('next-btn').classList.add('show');
+  document.getElementById('next-btn').textContent = currentIndex + 1 < filteredQuestions.length ? 'Next Question →' : 'See Results →';
+}
+
+function nextQuestion() {
+  currentIndex++;
+  if (currentIndex < filteredQuestions.length) {
+    renderQuestion();
+    document.getElementById('quiz-screen').scrollTop = 0;
+    window.scrollTo(0, 0);
+  } else {
+    showResults();
+  }
+}
+
+function showResults() {
+  document.getElementById('progress-fill').style.width = '100%';
+  const total = filteredQuestions.length;
+  const strongCount = answers.filter(a => a.chosen === a.q.strongest).length;
+  const pct = Math.round((strongCount / total) * 100);
+
+  document.getElementById('final-score').textContent = strongCount + '/' + total;
+
+  const levelEl = document.getElementById('result-level');
+  const heading = document.getElementById('result-heading');
+  const subtitle = document.getElementById('result-subtitle');
+
+  if (pct >= 75) {
+    levelEl.textContent = 'Strong Understanding'; levelEl.className = 'level-tag tag-excellent';
+    heading.textContent = 'You are ready for the discussion!';
+    subtitle.textContent = 'You gave the strongest answers most of the time. Focus on areas below.';
+  } else if (pct >= 50) {
+    levelEl.textContent = 'Developing Understanding'; levelEl.className = 'level-tag tag-good';
+    heading.textContent = 'Getting there — review weak areas.';
+    subtitle.textContent = 'Some answers were strong. Revisit the categories where you struggled.';
+  } else {
+    levelEl.textContent = 'Needs More Preparation'; levelEl.className = 'level-tag tag-review';
+    heading.textContent = 'More preparation needed before the discussion.';
+    subtitle.textContent = 'Read the Q&A guide and retry. Focus on the weak categories below.';
+  }
+
+  // category breakdown
+  const cats = {};
+  answers.forEach(a => {
+    if (!cats[a.q.category]) cats[a.q.category] = { total: 0, strong: 0 };
+    cats[a.q.category].total++;
+    if (a.chosen === a.q.strongest) cats[a.q.category].strong++;
+  });
+
+  const breakdownEl = document.getElementById('cat-breakdown');
+  breakdownEl.innerHTML = '';
+  Object.entries(cats).forEach(([cat, data]) => {
+    const catPct = Math.round((data.strong / data.total) * 100);
+    const color = catPct >= 70 ? '#43a047' : catPct >= 40 ? '#fb8c00' : '#e53935';
+    breakdownEl.innerHTML += `
+      <div class="cat-row">
+        <div class="cat-name">${cat}</div>
+        <div class="cat-bar-wrap"><div class="cat-bar" style="width:${catPct}%;background:${color}"></div></div>
+        <div class="cat-score">${data.strong}/${data.total}</div>
+      </div>`;
+  });
+
+  showScreen('results-screen');
+}
+
+function retryQuiz() {
+  startQuiz();
+}
+
+function restartToStart() {
+  showScreen('start-screen');
+  document.getElementById('progress-fill').style.width = '0%';
+  document.getElementById('header-info').textContent = 'Senior Project Defense Prep';
+}
+</script>
+</body>
+</html>

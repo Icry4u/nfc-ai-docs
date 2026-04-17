@@ -1,0 +1,1920 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Documentation for the NFC-AI Smart Shopping Assistant — Senior Project, Saudi Electronic University">
+      
+      
+      
+      
+        <link rel="prev" href="../ui/">
+      
+      
+        <link rel="next" href="../network/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>Data Layer - NFC-AI: Smart Shopping Assistant</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="amber">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#api-reference-data-layer" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="NFC-AI: Smart Shopping Assistant" class="md-header__button md-logo" aria-label="NFC-AI: Smart Shopping Assistant" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            NFC-AI: Smart Shopping Assistant
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Data Layer
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../user-guide/getting-started/" class="md-tabs__link">
+          
+  
+  
+  User Guide
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../architecture/overview/" class="md-tabs__link">
+          
+  
+  
+  Architecture
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../" class="md-tabs__link">
+          
+  
+  
+  API Reference
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../discussion/qa-guide/" class="md-tabs__link">
+          
+  
+  
+  Discussion Prep
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="NFC-AI: Smart Shopping Assistant" class="md-nav__button md-logo" aria-label="NFC-AI: Smart Shopping Assistant" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    NFC-AI: Smart Shopping Assistant
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    User Guide
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    User Guide
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../user-guide/getting-started/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Getting Started
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../user-guide/nfc-scanning/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NFC Scanning
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../user-guide/ai-recommendations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AI Recommendations
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../user-guide/text-to-speech/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Text-to-Speech
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../user-guide/settings/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Settings & Preferences
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../user-guide/accessibility/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Accessibility
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Architecture
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Architecture
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../architecture/overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../architecture/data-flow/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Data Flow
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../architecture/nfc-system/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NFC System
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../architecture/ai-pipeline/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AI Pipeline
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../architecture/tts-engine/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    TTS Engine
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../architecture/database/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Database
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Reference
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    API Reference
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Package Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ui/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UI Layer
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Data Layer
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Data Layer
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#product-entity" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Product Entity
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Product Entity">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#fields" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fields
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#localization-methods" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Localization Methods
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#scanhistory-entity" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ScanHistory Entity
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#productdao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ProductDao
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#scanhistorydao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ScanHistoryDao
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#appdatabase" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AppDatabase
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="AppDatabase">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#seed-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Seed Data
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#shoppingrepository" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ShoppingRepository
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="ShoppingRepository">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#pattern" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pattern
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#callback-interfaces" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Callback Interfaces
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../network/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Network Layer
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../utilities/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Utilities
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../viewmodels/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ViewModels
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Discussion Prep
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Discussion Prep
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../discussion/qa-guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Q&A Guide
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../discussion/technical-decisions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Technical Decisions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../quiz.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Committee Quiz
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#product-entity" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Product Entity
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Product Entity">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#fields" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fields
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#localization-methods" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Localization Methods
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#scanhistory-entity" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ScanHistory Entity
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#productdao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ProductDao
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#scanhistorydao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ScanHistoryDao
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#appdatabase" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AppDatabase
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="AppDatabase">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#seed-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Seed Data
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#shoppingrepository" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ShoppingRepository
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="ShoppingRepository">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#pattern" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pattern
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#callback-interfaces" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Callback Interfaces
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="api-reference-data-layer">API Reference — Data Layer<a class="headerlink" href="#api-reference-data-layer" title="Permanent link">&para;</a></h1>
+<h2 id="product-entity">Product Entity<a class="headerlink" href="#product-entity" title="Permanent link">&para;</a></h2>
+<p><strong>Path:</strong> <code>data/entity/Product.java</code></p>
+<p>Room entity representing a product in the database.</p>
+<h3 id="fields">Fields<a class="headerlink" href="#fields" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>id</code></td>
+<td>int</td>
+<td>Auto-generated primary key</td>
+</tr>
+<tr>
+<td><code>nfcTagId</code></td>
+<td>String</td>
+<td>NFC tag UID hex (unique index)</td>
+</tr>
+<tr>
+<td><code>name</code></td>
+<td>String</td>
+<td>English product name</td>
+</tr>
+<tr>
+<td><code>nameAr</code></td>
+<td>String</td>
+<td>Arabic product name (with tashkeel)</td>
+</tr>
+<tr>
+<td><code>brand</code></td>
+<td>String</td>
+<td>English brand name</td>
+</tr>
+<tr>
+<td><code>brandAr</code></td>
+<td>String</td>
+<td>Arabic brand name (with tashkeel)</td>
+</tr>
+<tr>
+<td><code>ingredients</code></td>
+<td>String</td>
+<td>English ingredients</td>
+</tr>
+<tr>
+<td><code>ingredientsAr</code></td>
+<td>String</td>
+<td>Arabic ingredients (with tashkeel)</td>
+</tr>
+<tr>
+<td><code>allergens</code></td>
+<td>String</td>
+<td>Comma-separated: "dairy,nuts"</td>
+</tr>
+<tr>
+<td><code>allergensAr</code></td>
+<td>String</td>
+<td>Arabic allergen labels</td>
+</tr>
+<tr>
+<td><code>weightGrams</code></td>
+<td>int</td>
+<td>Package weight</td>
+</tr>
+<tr>
+<td><code>calories</code></td>
+<td>float</td>
+<td>Per 100g</td>
+</tr>
+<tr>
+<td><code>protein</code></td>
+<td>float</td>
+<td>Per 100g</td>
+</tr>
+<tr>
+<td><code>carbs</code></td>
+<td>float</td>
+<td>Per 100g</td>
+</tr>
+<tr>
+<td><code>fat</code></td>
+<td>float</td>
+<td>Per 100g</td>
+</tr>
+<tr>
+<td><code>isHalal</code></td>
+<td>boolean</td>
+<td>Halal certified</td>
+</tr>
+<tr>
+<td><code>imageEmoji</code></td>
+<td>String</td>
+<td>Display emoji</td>
+</tr>
+</tbody>
+</table>
+<h3 id="localization-methods">Localization Methods<a class="headerlink" href="#localization-methods" title="Permanent link">&para;</a></h3>
+<p>All methods take a <code>lang</code> parameter ("en" or "ar"):</p>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Returns</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>getLocalizedName(lang)</code></td>
+<td>UI name (tashkeel stripped for Arabic)</td>
+</tr>
+<tr>
+<td><code>getLocalizedNameTts(lang)</code></td>
+<td>TTS name (tashkeel kept for Arabic pronunciation)</td>
+</tr>
+<tr>
+<td><code>getLocalizedBrand(lang)</code></td>
+<td>UI brand</td>
+</tr>
+<tr>
+<td><code>getLocalizedBrandTts(lang)</code></td>
+<td>TTS brand</td>
+</tr>
+<tr>
+<td><code>getLocalizedIngredients(lang)</code></td>
+<td>UI ingredients</td>
+</tr>
+<tr>
+<td><code>getLocalizedIngredientsTts(lang)</code></td>
+<td>TTS ingredients</td>
+</tr>
+<tr>
+<td><code>getLocalizedAllergens(lang)</code></td>
+<td>UI allergens</td>
+</tr>
+<tr>
+<td><code>getLocalizedAllergensTts(lang)</code></td>
+<td>TTS allergens</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="scanhistory-entity">ScanHistory Entity<a class="headerlink" href="#scanhistory-entity" title="Permanent link">&para;</a></h2>
+<p><strong>Path:</strong> <code>data/entity/ScanHistory.java</code></p>
+<p>Records each product scan with timestamp.</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>id</code></td>
+<td>int</td>
+<td>Auto-generated PK</td>
+</tr>
+<tr>
+<td><code>productId</code></td>
+<td>int</td>
+<td>FK → Product.id (CASCADE delete)</td>
+</tr>
+<tr>
+<td><code>scannedAt</code></td>
+<td>long</td>
+<td>Timestamp (System.currentTimeMillis)</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="productdao">ProductDao<a class="headerlink" href="#productdao" title="Permanent link">&para;</a></h2>
+<p><strong>Path:</strong> <code>data/dao/ProductDao.java</code></p>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Return Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>getProductByTagId(tagId)</code></td>
+<td><code>LiveData&lt;Product&gt;</code></td>
+<td>Async lookup by NFC UID</td>
+</tr>
+<tr>
+<td><code>getProductByTagIdSync(tagId)</code></td>
+<td><code>Product</code></td>
+<td>Sync lookup (background thread only)</td>
+</tr>
+<tr>
+<td><code>getProductById(id)</code></td>
+<td><code>LiveData&lt;Product&gt;</code></td>
+<td>Lookup by primary key</td>
+</tr>
+<tr>
+<td><code>getProductByIdSync(id)</code></td>
+<td><code>Product</code></td>
+<td>Sync version</td>
+</tr>
+<tr>
+<td><code>getAllProducts()</code></td>
+<td><code>LiveData&lt;List&lt;Product&gt;&gt;</code></td>
+<td>All products</td>
+</tr>
+<tr>
+<td><code>searchByName(query)</code></td>
+<td><code>LiveData&lt;List&lt;Product&gt;&gt;</code></td>
+<td>Search name/nameAr</td>
+</tr>
+<tr>
+<td><code>getProductCount()</code></td>
+<td><code>int</code></td>
+<td>For seed guard</td>
+</tr>
+<tr>
+<td><code>insertAll(List&lt;Product&gt;)</code></td>
+<td><code>void</code></td>
+<td>Bulk insert</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="scanhistorydao">ScanHistoryDao<a class="headerlink" href="#scanhistorydao" title="Permanent link">&para;</a></h2>
+<p><strong>Path:</strong> <code>data/dao/ScanHistoryDao.java</code></p>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Return Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>insert(ScanHistory)</code></td>
+<td><code>void</code></td>
+<td>Record a scan</td>
+</tr>
+<tr>
+<td><code>getAllHistory()</code></td>
+<td><code>LiveData&lt;List&lt;ScanHistory&gt;&gt;</code></td>
+<td>All scans (newest first)</td>
+</tr>
+<tr>
+<td><code>getRecentScans(limit)</code></td>
+<td><code>LiveData&lt;List&lt;ScanHistory&gt;&gt;</code></td>
+<td>Last N scans</td>
+</tr>
+<tr>
+<td><code>getScanCount()</code></td>
+<td><code>LiveData&lt;Integer&gt;</code></td>
+<td>Total scan count</td>
+</tr>
+<tr>
+<td><code>getAllergenAlertCount()</code></td>
+<td><code>int</code></td>
+<td>Sync count</td>
+</tr>
+<tr>
+<td><code>deleteAll()</code></td>
+<td><code>void</code></td>
+<td>Clear history</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="appdatabase">AppDatabase<a class="headerlink" href="#appdatabase" title="Permanent link">&para;</a></h2>
+<p><strong>Path:</strong> <code>data/database/AppDatabase.java</code></p>
+<p>Room database singleton. Version 5 with destructive migration fallback.</p>
+<h3 id="seed-data">Seed Data<a class="headerlink" href="#seed-data" title="Permanent link">&para;</a></h3>
+<p>15 products pre-seeded in <code>onOpen</code> callback (not <code>onCreate</code>):</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">RoomDatabase</span><span class="p">.</span><span class="na">Callback</span><span class="w"> </span><span class="n">seedDatabaseCallback</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">RoomDatabase</span><span class="p">.</span><span class="na">Callback</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">    </span><span class="nd">@Override</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">onOpen</span><span class="p">(</span><span class="nd">@NonNull</span><span class="w"> </span><span class="n">SupportSQLiteDatabase</span><span class="w"> </span><span class="n">db</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">        </span><span class="n">Executors</span><span class="p">.</span><span class="na">newSingleThreadExecutor</span><span class="p">().</span><span class="na">execute</span><span class="p">(()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">            </span><span class="n">ProductDao</span><span class="w"> </span><span class="n">dao</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">INSTANCE</span><span class="p">.</span><span class="na">productDao</span><span class="p">();</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">dao</span><span class="p">.</span><span class="na">getProductCount</span><span class="p">()</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="p">;</span><span class="w">  </span><span class="c1">// Already seeded</span>
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="w">            </span><span class="c1">// Insert 15 products...</span>
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="w">        </span><span class="p">});</span>
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="p">};</span>
+</code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">Why onOpen instead of onCreate</p>
+<p><code>onCreate</code> doesn't fire after destructive migration. <code>onOpen</code> fires every time with a count guard, ensuring data is always present.</p>
+</div>
+<hr />
+<h2 id="shoppingrepository">ShoppingRepository<a class="headerlink" href="#shoppingrepository" title="Permanent link">&para;</a></h2>
+<p><strong>Path:</strong> <code>data/repository/ShoppingRepository.java</code></p>
+<p>Wraps DAOs and provides async execution via <code>ExecutorService</code>.</p>
+<h3 id="pattern">Pattern<a class="headerlink" href="#pattern" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">getProductByTagIdSync</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">tagId</span><span class="p">,</span><span class="w"> </span><span class="n">ProductCallback</span><span class="w"> </span><span class="n">callback</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">    </span><span class="n">executor</span><span class="p">.</span><span class="na">execute</span><span class="p">(()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">        </span><span class="n">Product</span><span class="w"> </span><span class="n">product</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">productDao</span><span class="p">.</span><span class="na">getProductByTagIdSync</span><span class="p">(</span><span class="n">tagId</span><span class="p">);</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">        </span><span class="n">callback</span><span class="p">.</span><span class="na">onResult</span><span class="p">(</span><span class="n">product</span><span class="p">);</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="w">    </span><span class="p">});</span>
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="p">}</span>
+</code></pre></div>
+<h3 id="callback-interfaces">Callback Interfaces<a class="headerlink" href="#callback-interfaces" title="Permanent link">&para;</a></h3>
+<ul>
+<li><code>ProductCallback</code> — <code>void onResult(Product product)</code></li>
+<li>All write operations run on background executor</li>
+<li>Read operations return <code>LiveData</code> for UI observation</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.sections", "navigation.expand", "navigation.top", "search.suggest", "content.code.copy"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>
