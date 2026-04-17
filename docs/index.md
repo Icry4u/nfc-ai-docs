@@ -73,6 +73,16 @@ graph TD
 
 **Supervisor:** Dr. Moner AlSader — Saudi Electronic University, College of Computing and Informatics
 
+## Download
+
+<div style="margin:24px 0;padding:20px;background:#e0f2f1;border-radius:12px;border:1px solid #00897b;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;">
+  <div>
+    <div style="font-weight:700;color:#004d40;font-size:1rem;">NFC-AI Shopping Assistant</div>
+    <div style="color:#00695c;font-size:0.88rem;margin-top:4px;">Android APK — install directly on your phone</div>
+  </div>
+  <a href="NFC-AI_Shopping_Assistant.apk" style="background:#00897b;color:#fff;padding:12px 24px;border-radius:8px;font-weight:600;font-size:0.9rem;text-decoration:none;white-space:nowrap;">Download APK</a>
+</div>
+
 ## Quick Links
 
 - [Getting Started](user-guide/getting-started.md) — First launch walkthrough
