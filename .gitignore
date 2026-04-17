@@ -23,6 +23,20 @@ gen_*.py
 # Generated site (mkdocs gh-deploy handles this)
 site/
 
+# Project reports
+*.docx
+*.pdf
+
+# Java crash logs
+hs_err_*.log
+replay_*.log
+
+# Gradle properties
+gradle.properties
+
+# APK files
+*.apk
+
 # OS
 .DS_Store
 Thumbs.db
