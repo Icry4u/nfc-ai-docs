@@ -1,0 +1,69 @@
+site_name: "NFC-AI: Smart Shopping Assistant"
+site_description: "Documentation for the NFC-AI Smart Shopping Assistant — Senior Project, Saudi Electronic University"
+site_url: ""
+repo_url: ""
+
+theme:
+  name: material
+  palette:
+    scheme: default
+    primary: teal
+    accent: amber
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - navigation.expand
+    - navigation.top
+    - search.suggest
+    - content.code.copy
+  icon:
+    repo: fontawesome/brands/github
+
+extra_css:
+  - stylesheets/extra.css
+
+markdown_extensions:
+  - tables
+  - admonition
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.details
+  - pymdownx.tabbed:
+      alternate_style: true
+  - attr_list
+  - md_in_html
+  - toc:
+      permalink: true
+
+nav:
+  - Home: index.md
+  - User Guide:
+    - Getting Started: user-guide/getting-started.md
+    - NFC Scanning: user-guide/nfc-scanning.md
+    - AI Recommendations: user-guide/ai-recommendations.md
+    - Text-to-Speech: user-guide/text-to-speech.md
+    - Settings & Preferences: user-guide/settings.md
+    - Accessibility: user-guide/accessibility.md
+  - Architecture:
+    - Overview: architecture/overview.md
+    - Data Flow: architecture/data-flow.md
+    - NFC System: architecture/nfc-system.md
+    - AI Pipeline: architecture/ai-pipeline.md
+    - TTS Engine: architecture/tts-engine.md
+    - Database: architecture/database.md
+  - API Reference:
+    - Package Overview: api/index.md
+    - UI Layer: api/ui.md
+    - Data Layer: api/data.md
+    - Network Layer: api/network.md
+    - Utilities: api/utilities.md
+    - ViewModels: api/viewmodels.md
+  - Discussion Prep:
+    - Q&A Guide: discussion/qa-guide.md
+    - Technical Decisions: discussion/technical-decisions.md
+    - Committee Quiz: quiz.html

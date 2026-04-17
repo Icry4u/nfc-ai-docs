@@ -1,0 +1,27 @@
+/* Force Mermaid diagrams to always render with a white background + dark text */
+.mermaid,
+.mermaid svg {
+  background: #ffffff !important;
+  border-radius: 8px;
+}
+
+.mermaid {
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid #e0e0e0;
+}
+
+/* Force all SVG text to dark regardless of page theme */
+[data-md-color-scheme="slate"] .mermaid svg text,
+[data-md-color-scheme="slate"] .mermaid svg .label,
+[data-md-color-scheme="slate"] .mermaid svg .nodeLabel,
+[data-md-color-scheme="slate"] .mermaid svg .edgeLabel,
+[data-md-color-scheme="slate"] .mermaid svg tspan {
+  fill: #111111 !important;
+  color: #111111 !important;
+}
+
+[data-md-color-scheme="slate"] .mermaid svg .cluster-label text,
+[data-md-color-scheme="slate"] .mermaid svg g.label text {
+  fill: #111111 !important;
+}

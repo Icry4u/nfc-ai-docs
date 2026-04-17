@@ -1,0 +1,28 @@
+# Android app source (docs-only repo)
+app/
+gradle/
+.gradle/
+build/
+*.gradle
+gradlew
+gradlew.bat
+local.properties
+
+# Claude settings (contains API keys)
+.claude/
+
+# Python test scripts (contain API keys)
+test_*.py
+gen_*.py
+*.py
+
+# IDE
+.idea/
+*.iml
+
+# Generated site (mkdocs gh-deploy handles this)
+site/
+
+# OS
+.DS_Store
+Thumbs.db
