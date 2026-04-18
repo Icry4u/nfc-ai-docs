@@ -1515,74 +1515,110 @@
 </details>
 <details class="question">
 <summary>Are there similar ideas out there?</summary>
-<p>Based on our literature review of over <strong>20 academic papers</strong>, we found no existing application that combines all three pillars of our system:</p>
-<table>
-<thead>
-<tr>
-<th>System Component</th>
-<th>Existing Research</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>NFC product scanning</td>
-<td>Used only for payments or static product info</td>
-</tr>
-<tr>
-<td>AI dietary recommendations</td>
-<td>Exist as standalone apps, not in-store</td>
-</tr>
-<tr>
-<td>Voice/TTS accessibility</td>
-<td>Not integrated with NFC scanning</td>
-</tr>
-</tbody>
-</table>
-<p>The gap we identified: <strong>no unified system</strong> combines NFC object detection, AI-powered nutrition guidance, and voice-based accessibility in a single mobile tool.</p>
+<p>Yes — there are apps that partially overlap with what we built. We identified <strong>3 close existing apps</strong>:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:3"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Yuka</label><label for="__tabbed_1_2">Open Food Facts</label><label for="__tabbed_1_3">Carrefour Saudi App</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<p><strong>Yuka</strong> is a popular food scanning app available on iOS and Android. Users scan a product barcode with the camera and receive a health score, nutrition breakdown, and ingredient analysis.</p>
+<ul>
+<li>Uses <strong>barcode scanning</strong> (camera-based), not NFC</li>
+<li>Provides nutrition scores and ingredient flags</li>
+<li>No AI-generated alternative product recommendations</li>
+<li>No Arabic language support</li>
+<li>No Arabic/English bilingual support</li>
+<li>No text-to-speech for visually impaired users</li>
+</ul>
+</div>
+<div class="tabbed-block">
+<p><strong>Open Food Facts</strong> is an open-source community-driven food database app. Users scan barcodes to view crowdsourced nutrition and ingredient data.</p>
+<ul>
+<li>Uses <strong>barcode scanning</strong> (camera-based), not NFC</li>
+<li>Community-sourced data — accuracy varies</li>
+<li>No personalized allergen profiles</li>
+<li>No AI recommendations</li>
+<li>Limited Arabic support</li>
+<li>No text-to-speech</li>
+</ul>
+</div>
+<div class="tabbed-block">
+<p>The <strong>Carrefour KSA</strong> app allows shoppers to scan products in-store for pricing and basic product info.</p>
+<ul>
+<li>Uses <strong>barcode scanning</strong>, not NFC</li>
+<li>Focused on price and inventory, not nutrition safety</li>
+<li>No allergen warnings or dietary filtering</li>
+<li>No AI recommendations</li>
+<li>No text-to-speech</li>
+</ul>
+</div>
+</div>
+</div>
+<p><strong>How many did we find?</strong> We found <strong>3 apps</strong> that are close or similar in concept, plus reviewed over 20 academic research papers on related systems.</p>
 </details>
 <details class="question">
-<summary>How does your project differ from existing solutions?</summary>
+<summary>How does your project differ from them?</summary>
 <table>
 <thead>
 <tr>
 <th>Feature</th>
 <th>Our App</th>
-<th>Existing Solutions</th>
+<th>Yuka</th>
+<th>Open Food Facts</th>
+<th>Carrefour KSA</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>NFC tap-to-scan</td>
-<td>✅</td>
-<td>❌ Barcode/camera only</td>
+<td><strong>Scanning method</strong></td>
+<td>NFC tap</td>
+<td>Barcode (camera)</td>
+<td>Barcode (camera)</td>
+<td>Barcode (camera)</td>
 </tr>
 <tr>
-<td>AI alternative recommendations</td>
-<td>✅</td>
+<td><strong>AI recommendations</strong></td>
+<td>✅ 3 safe alternatives</td>
+<td>❌</td>
+<td>❌</td>
 <td>❌</td>
 </tr>
 <tr>
-<td>Arabic/English bilingual</td>
-<td>✅</td>
+<td><strong>Allergen profile filtering</strong></td>
+<td>✅ Personal profile</td>
+<td>Partial</td>
+<td>Partial</td>
+<td>❌</td>
+</tr>
+<tr>
+<td><strong>Arabic language</strong></td>
+<td>✅ Full bilingual</td>
+<td>❌</td>
+<td>❌</td>
 <td>Partial</td>
 </tr>
 <tr>
-<td>Halal status tracking</td>
-<td>✅</td>
+<td><strong>Text-to-speech</strong></td>
+<td>✅ Arabic + English</td>
+<td>❌</td>
+<td>❌</td>
 <td>❌</td>
 </tr>
 <tr>
-<td>Text-to-speech (accessibility)</td>
-<td>✅</td>
+<td><strong>Works offline</strong></td>
+<td>✅ Local database</td>
+<td>Partial</td>
+<td>Partial</td>
 <td>❌</td>
 </tr>
 <tr>
-<td>Offline local database</td>
+<td><strong>Visually impaired support</strong></td>
 <td>✅</td>
-<td>Limited</td>
+<td>❌</td>
+<td>❌</td>
+<td>❌</td>
 </tr>
 </tbody>
 </table>
+<p>The key differentiator is <strong>NFC + AI + Accessibility</strong> combined in one app. No existing solution targets visually impaired shoppers in Saudi Arabia with an AI-powered, Arabic-speaking, NFC-based assistant.</p>
 </details>
 <details class="question">
 <summary>What features does your project have that are not in the market yet?</summary>
@@ -1591,11 +1627,12 @@
 <li><strong>AI-powered safe alternatives</strong> — LLaMA 3.3 70B (via Groq) analyzes your personal allergen profile and recommends 3 specific safe products with reasons and nutrition data</li>
 <li><strong>Arabic text-to-speech</strong> — reads results aloud to support visually impaired users</li>
 <li><strong>Full bilingual product data</strong> — Arabic with diacritical marks (tashkeel) + English in the same database</li>
+<li><strong>Personal allergen profile</strong> — user sets their restrictions once (dairy-free, gluten-free, nut allergy, vegan) and every recommendation is filtered against that profile</li>
 </ol>
 </details>
 <details class="question">
 <summary>Does your project solve a real life problem?</summary>
-<p>Yes. Misreading a food label can cause a <strong>life-threatening allergic reaction</strong>. Visually impaired users cannot read labels at all. In Saudi Arabia, halal compliance is a religious and legal requirement. Our app removes these risks instantly at the point of purchase.</p>
+<p>Yes. Misreading a food label can cause a <strong>life-threatening allergic reaction</strong>. Visually impaired users cannot read labels at all. Our app removes these risks instantly at the point of purchase.</p>
 </details>
 <details class="question">
 <summary>What category does your project fall under?</summary>
@@ -1611,7 +1648,7 @@
 <details class="question">
 <summary>How many tables do you have?</summary>
 <p><strong>Two tables:</strong></p>
-<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">products</label><label for="__tabbed_1_2">scan_history</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="2:2"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">products</label><label for="__tabbed_2_2">scan_history</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <p>Stores all product information</p>
@@ -2207,7 +2244,7 @@
 <h2 id="security">Security<a class="headerlink" href="#security" title="Permanent link">&para;</a></h2>
 <details class="question">
 <summary>How did you make your app secure?</summary>
-<div class="tabbed-set tabbed-alternate" data-tabs="2:6"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><input id="__tabbed_2_3" name="__tabbed_2" type="radio" /><input id="__tabbed_2_4" name="__tabbed_2" type="radio" /><input id="__tabbed_2_5" name="__tabbed_2" type="radio" /><input id="__tabbed_2_6" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Input Sanitization</label><label for="__tabbed_2_2">Gibberish Detection</label><label for="__tabbed_2_3">NFC Hardware ID</label><label for="__tabbed_2_4">No User Accounts</label><label for="__tabbed_2_5">HTTPS Only</label><label for="__tabbed_2_6">Known Limitation</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="3:6"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><input id="__tabbed_3_2" name="__tabbed_3" type="radio" /><input id="__tabbed_3_3" name="__tabbed_3" type="radio" /><input id="__tabbed_3_4" name="__tabbed_3" type="radio" /><input id="__tabbed_3_5" name="__tabbed_3" type="radio" /><input id="__tabbed_3_6" name="__tabbed_3" type="radio" /><div class="tabbed-labels"><label for="__tabbed_3_1">Input Sanitization</label><label for="__tabbed_3_2">Gibberish Detection</label><label for="__tabbed_3_3">NFC Hardware ID</label><label for="__tabbed_3_4">No User Accounts</label><label for="__tabbed_3_5">HTTPS Only</label><label for="__tabbed_3_6">Known Limitation</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <p>All AI text responses are cleaned before displaying to the user:</p>
@@ -2304,7 +2341,7 @@
 <h2 id="testing">Testing<a class="headerlink" href="#testing" title="Permanent link">&para;</a></h2>
 <details class="question">
 <summary>How did you test your project?</summary>
-<div class="tabbed-set tabbed-alternate" data-tabs="3:3"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><input id="__tabbed_3_2" name="__tabbed_3" type="radio" /><input id="__tabbed_3_3" name="__tabbed_3" type="radio" /><div class="tabbed-labels"><label for="__tabbed_3_1">Manual Functional Testing</label><label for="__tabbed_3_2">Integration Testing</label><label for="__tabbed_3_3">Unit Testing</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="4:3"><input checked="checked" id="__tabbed_4_1" name="__tabbed_4" type="radio" /><input id="__tabbed_4_2" name="__tabbed_4" type="radio" /><input id="__tabbed_4_3" name="__tabbed_4" type="radio" /><div class="tabbed-labels"><label for="__tabbed_4_1">Manual Functional Testing</label><label for="__tabbed_4_2">Integration Testing</label><label for="__tabbed_4_3">Unit Testing</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <p>Tested on a real Android device — every screen, NFC scan, AI response, and edge case:</p>
